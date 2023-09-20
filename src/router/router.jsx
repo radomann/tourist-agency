@@ -9,13 +9,20 @@ export const appRoutes = [
         children: [
             {
                 index: true,
-                element: <App />
+                element: <App />,
+                // children: [
+                //     {
+                //         path: 'about',
+                //         element: <About />
+                //     }
+                // ]
             },
             {
                 path: 'admin',
                 element: <AdminPanel />,
                 children: [
-                    {
+                    {   
+                        path: '',
                         index: true,
                         element: <Dashboard />,
                     },
