@@ -2,6 +2,7 @@ import { App } from "../tourist-site/index"
 import { AdminPanel } from "../admin-panel/layout"
 import { Dashboard } from "../admin-panel/pages/Dashboard"
 import { Posts } from "../admin-panel/pages/Posts"
+import { AboutPage } from "../tourist-site/pages/about"
 
 export const appRoutes = [
     {
@@ -9,13 +10,7 @@ export const appRoutes = [
         children: [
             {
                 index: true,
-                element: <App />,
-                // children: [
-                //     {
-                //         path: 'about',
-                //         element: <About />
-                //     }
-                // ]
+                element: <App />
             },
             {
                 path: 'admin',
@@ -31,7 +26,19 @@ export const appRoutes = [
                         element: <Posts />
                     }
                 ]
-            }
+            },
+            {
+                path: 'about',
+                element: <AboutPage />
+            },
+            // {
+            //     path: 'destiantions',
+            //     element: <Destinations />
+            // },
+            // {
+            //     path: 'contact',
+            //     element: <Contact />
+            // }
         ]
     }
 ]

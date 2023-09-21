@@ -1,4 +1,7 @@
-export const AboutPage = 
-<>
-    <div>About bage</div>
-</>
+export const AboutPage = () => {
+    return (
+            <>
+                <div>About page</div>
+            </>
+    )
+}
