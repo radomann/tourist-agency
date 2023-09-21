@@ -1,7 +1,7 @@
 import { App } from "../tourist-site/index"
 import { AdminPanel } from "../admin-panel/layout"
 import { Dashboard } from "../admin-panel/pages/Dashboard"
-import { AdminPanelPosts } from "../admin-panel/pages/Posts"
+import { Posts as AdminPanelPosts } from "../admin-panel/pages/Posts"
 import { AboutPage } from "../tourist-site/pages/about"
 
 export const appRoutes = [
