@@ -3,6 +3,7 @@ import { AdminPanel } from "../admin-panel/layout"
 import { Dashboard } from "../admin-panel/pages/Dashboard"
 import { Posts as AdminPanelPosts } from "../admin-panel/pages/Posts"
 import { AboutPage } from "../tourist-site/pages/about"
+import { HomePage } from "../tourist-site/pages/home"
 
 export const appRoutes = [
     {
@@ -10,7 +11,7 @@ export const appRoutes = [
         children: [
             {
                 index: true,
-                element: <App />
+                element: <App />,
             },
             {
                 path: 'admin',
@@ -30,6 +31,10 @@ export const appRoutes = [
             {
                 path: 'about',
                 element: <AboutPage />
+            },
+            {
+                path: 'home',
+                element: <HomePage />
             },
             // {
             //     path: 'destiantions',

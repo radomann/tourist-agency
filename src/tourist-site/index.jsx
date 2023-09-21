@@ -1,7 +1,9 @@
 import { useState } from 'react';
 import '../App.css'
+import 'bootstrap/dist/css/bootstrap.min.css';
 import { AppLayout } from './layout';
 import { HomePage } from './pages/home'
+import { AboutPage } from './pages/about';
 
 
 export const App = () => {
@@ -10,7 +12,8 @@ export const App = () => {
   return (
     <>
       { AppLayout }
-      { HomePage }
+      {/* { HomePage } */}
+      {/* { AboutPage } */}
     </>
   )
 }
