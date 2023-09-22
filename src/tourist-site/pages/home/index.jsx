@@ -1,5 +1,5 @@
 // import { useEffect, useState } from "react";
-import { Card, Testimonial2 } from "../../components/homecomponents";
+import { Card, CoruselNavigation, Testimonial2, Testimonial3 } from "../../components/homecomponents";
 
 import { AppLayout } from "../../layout";
 
@@ -61,6 +61,16 @@ export const HomePage = () => {
             </div>
         </div>
 
+        {/* Testimonials */}
+        {/* <div id="carouselMultiItemExample" className="carousel slide carousel-dark text-center" data-mdb-ride="carousel">
+            {CoruselNavigation}
+            <div className="carousel-inner py-4">
+                {Testimonial3}
+            </div>
+        </div> */}
+        Testim();
+        {/* {<Testimonial3 />} */}
+        
     {/* {dummyTestimonial.map(({ name, description, location, image}, index) => <Testimonial2 key={index} name={name} description={description} location={location} image={image} />)} */}
 
 

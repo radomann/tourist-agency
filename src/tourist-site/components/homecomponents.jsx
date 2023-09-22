@@ -1,4 +1,14 @@
 import { NavLink } from 'react-router-dom';
+import {
+    MDBCarousel,
+    MDBCarouselInner,
+    MDBCarouselItem,
+    MDBCol,
+    MDBIcon,
+    MDBTypography,
+    MDBContainer,
+    MDBRow,
+  } from "mdb-react-ui-kit";
 
 export const Card = ({ name, description, price, image }) => (
 
@@ -33,33 +43,746 @@ export const Card = ({ name, description, price, image }) => (
 
 );
 
-export const Testimonial = ({ name, description, location, image }) => (
-            <div className="testimonial-item bg-white text-center border p-4">
-                <img className="bg-white rounded-circle shadow p-1 mx-auto mb-3 imgSize" src={image} />
-                <h5 className="mb-0">{name}</h5>
-                <p>{location}</p>
-                <p className="mb-0">{description}</p>
-            </div>
-);
 
-export const Testimonial2 = ({name, description, location, image }) => (
-    // console.log('key je ', key);
-    // console.log('key je ', name);
-    // console.log('key je ', description);
-    // console.log('key je ', location);
-    // console.log('key je ', image);
+export const Testimonial3 = 
+<>
+<div className="carousel-item active">
+      <div className="container">
+        <div className="row">
+          <div className="col-lg-4">
+            <img className="rounded-circle shadow-1-strong mb-4 imgSize"
+              src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(1).webp" alt="avatar" />
+            <h5 className="mb-3">Anna Deynah</h5>
+            <p>UX Designer</p>
+            <p className="text-muted">
+              <i className="fas fa-quote-left pe-2"></i>
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod eos id
+              officiis hic tenetur quae quaerat ad velit ab hic tenetur.
+            </p>
+            <ul className="list-unstyled d-flex justify-content-center text-warning mb-0">
+              <li><i className="fas fa-star fa-sm"></i></li>
+              <li><i className="fas fa-star fa-sm"></i></li>
+              <li><i className="fas fa-star fa-sm"></i></li>
+              <li><i className="fas fa-star fa-sm"></i></li>
+              <li><i className="fas fa-star fa-sm"></i></li>
+            </ul>
+          </div>
+
+          <div className="col-lg-4 d-none d-lg-block">
+            <img className="rounded-circle shadow-1-strong mb-4 imgSize"
+              src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(32).webp" alt="avatar" />
+            <h5 className="mb-3">John Doe</h5>
+            <p>Web Developer</p>
+            <p className="text-muted">
+              <i className="fas fa-quote-left pe-2"></i>
+              Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis
+              suscipit laboriosam, nisi ut aliquid commodi.
+            </p>
+            <ul className="list-unstyled d-flex justify-content-center text-warning mb-0">
+              <li><i className="fas fa-star fa-sm"></i></li>
+              <li><i className="fas fa-star fa-sm"></i></li>
+              <li><i className="fas fa-star fa-sm"></i></li>
+              <li><i className="fas fa-star fa-sm"></i></li>
+              <li>
+                <i className="fas fa-star-half-alt fa-sm"></i>
+              </li>
+            </ul>
+          </div>
+
+          <div className="col-lg-4 d-none d-lg-block">
+            <img className="rounded-circle shadow-1-strong mb-4 imgSize"
+              src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(10).webp" alt="avatar" />
+            <h5 className="mb-3">Maria Kate</h5>
+            <p>Photographer</p>
+            <p className="text-muted">
+              <i className="fas fa-quote-left pe-2"></i>
+              At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis
+              praesentium voluptatum deleniti atque corrupti.
+            </p>
+            <ul className="list-unstyled d-flex justify-content-center text-warning mb-0">
+              <li><i className="fas fa-star fa-sm"></i></li>
+              <li><i className="fas fa-star fa-sm"></i></li>
+              <li><i className="fas fa-star fa-sm"></i></li>
+              <li><i className="fas fa-star fa-sm"></i></li>
+              <li><i className="far fa-star fa-sm"></i></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>  
+
     <div className="carousel-item">
-    <img className="rounded-circle shadow-1-strong mb-4 imgSize"
-      src={image} alt="avatar" />
-    <div className="row d-flex justify-content-center">
-      <div className="col-lg-8">
-        <h5 className="mb-3">{name}</h5>
-        <p>{location}</p>
-        <p className="text-muted">
-          <i className="fas fa-quote-left pe-2"></i>
-         {description}
-        </p>
+      <div className="container">
+        <div className="row">
+          <div className="col-lg-4">
+            <img className="rounded-circle shadow-1-strong mb-4 imgSize"
+              src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(3).webp" alt="avatar" />
+            <h5 className="mb-3">John Doe</h5>
+            <p>UX Designer</p>
+            <p className="text-muted">
+              <i className="fas fa-quote-left pe-2"></i>
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod eos id
+              officiis hic tenetur quae quaerat ad velit ab hic tenetur.
+            </p>
+            <ul className="list-unstyled d-flex justify-content-center text-warning mb-0">
+              <li><i className="fas fa-star fa-sm"></i></li>
+              <li><i className="fas fa-star fa-sm"></i></li>
+              <li><i className="fas fa-star fa-sm"></i></li>
+              <li><i className="fas fa-star fa-sm"></i></li>
+              <li><i className="fas fa-star fa-sm"></i></li>
+            </ul>
+          </div>
+
+          <div className="col-lg-4 d-none d-lg-block">
+            <img className="rounded-circle shadow-1-strong mb-4 imgSize"
+              src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(4).webp" alt="avatar" />
+            <h5 className="mb-3">Alex Rey</h5>
+            <p>Web Developer</p>
+            <p className="text-muted">
+              <i className="fas fa-quote-left pe-2"></i>
+              Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis
+              suscipit laboriosam, nisi ut aliquid commodi.
+            </p>
+            <ul className="list-unstyled d-flex justify-content-center text-warning mb-0">
+              <li><i className="fas fa-star fa-sm"></i></li>
+              <li><i className="fas fa-star fa-sm"></i></li>
+              <li><i className="fas fa-star fa-sm"></i></li>
+              <li><i className="fas fa-star fa-sm"></i></li>
+              <li>
+                <i className="fas fa-star-half-alt fa-sm"></i>
+              </li>
+            </ul>
+          </div>
+
+          <div className="col-lg-4 d-none d-lg-block">
+            <img className="rounded-circle shadow-1-strong mb-4 imgSize"
+              src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(5).webp" alt="avatar" />
+            <h5 className="mb-3">Maria Kate</h5>
+            <p>Photographer</p>
+            <p className="text-muted">
+              <i className="fas fa-quote-left pe-2"></i>
+              At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis
+              praesentium voluptatum deleniti atque corrupti.
+            </p>
+            <ul className="list-unstyled d-flex justify-content-center text-warning mb-0">
+              <li><i className="fas fa-star fa-sm"></i></li>
+              <li><i className="fas fa-star fa-sm"></i></li>
+              <li><i className="fas fa-star fa-sm"></i></li>
+              <li><i className="fas fa-star fa-sm"></i></li>
+              <li><i className="far fa-star fa-sm"></i></li>
+            </ul>
+          </div>
+        </div>
       </div>
     </div>
-    </div>
-);
+</>
+
+export const CoruselNavigation = 
+<>
+<div className="d-flex justify-content-center mb-4">
+    <button className="carousel-control-prev position-relative" type="button"
+      data-mdb-target="#carouselMultiItemExample" data-mdb-slide="prev">
+      <span className="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span className="visually-hidden">Previous</span>
+    </button>
+    <button className="carousel-control-next position-relative" type="button"
+      data-mdb-target="#carouselMultiItemExample" data-mdb-slide="next">
+      <span className="carousel-control-next-icon" aria-hidden="true"></span>
+      <span className="visually-hidden">Next</span>
+    </button>
+  </div>
+</>
+
+
+export default function Testim() {
+    return (
+      <MDBContainer className="py-5">
+        <MDBCarousel showControls dark>
+          <MDBCarouselInner>
+            <MDBCarouselItem className="active">
+              <MDBContainer>
+                <MDBRow className="text-center">
+                  <MDBCol lg="4" className="mb-5 mb-md-0">
+                    <div className="d-flex justify-content-center mb-4">
+                      <img
+                        src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(1).webp"
+                        className="rounded-circle shadow-1-strong"
+                        width="150"
+                        height="150"
+                      />
+                    </div>
+                    <h5 className="mb-3">Anna Deynah</h5>
+                    <h6 className="text-primary mb-3">UX Designer</h6>
+                    <p className="px-xl-3">
+                      <MDBIcon fas icon="quote-left" className="pe-2" />
+                      Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                      Quod eos id officiis hic tenetur quae quaerat ad velit ab
+                      hic tenetur.
+                    </p>
+                    <MDBTypography
+                      listUnStyled
+                      className="d-flex justify-content-center mb-0"
+                    >
+                      <li>
+                        <MDBIcon
+                          fas
+                          icon="star"
+                          size="sm"
+                          className="text-warning"
+                        />
+                      </li>
+                      <li>
+                        <MDBIcon
+                          fas
+                          icon="star"
+                          size="sm"
+                          className="text-warning"
+                        />
+                      </li>
+                      <li>
+                        <MDBIcon
+                          fas
+                          icon="star"
+                          size="sm"
+                          className="text-warning"
+                        />
+                      </li>
+                      <li>
+                        <MDBIcon
+                          fas
+                          icon="star"
+                          size="sm"
+                          className="text-warning"
+                        />
+                      </li>
+                      <li>
+                        <MDBIcon
+                          fas
+                          icon="star"
+                          size="sm"
+                          className="text-warning"
+                        />
+                      </li>
+                    </MDBTypography>
+                  </MDBCol>
+                  <MDBCol lg="4" className="d-none d-lg-block">
+                    <div className="d-flex justify-content-center mb-4">
+                      <img
+                        src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(32).webp"
+                        className="rounded-circle shadow-1-strong"
+                        width="150"
+                        height="150"
+                      />
+                    </div>
+                    <h5 className="mb-3">John Doe</h5>
+                    <h6 className="text-primary mb-3">Web Developer</h6>
+                    <p className="px-xl-3">
+                      <MDBIcon fas icon="quote-left" className="pe-2" />
+                      Ut enim ad minima veniam, quis nostrum exercitationem ullam
+                      corporis suscipit laboriosam, nisi ut aliquid commodi.
+                    </p>
+                    <MDBTypography
+                      listUnStyled
+                      className="d-flex justify-content-center mb-0"
+                    >
+                      <li>
+                        <MDBIcon
+                          fas
+                          icon="star"
+                          size="sm"
+                          className="text-warning"
+                        />
+                      </li>
+                      <li>
+                        <MDBIcon
+                          fas
+                          icon="star"
+                          size="sm"
+                          className="text-warning"
+                        />
+                      </li>
+                      <li>
+                        <MDBIcon
+                          fas
+                          icon="star"
+                          size="sm"
+                          className="text-warning"
+                        />
+                      </li>
+                      <li>
+                        <MDBIcon
+                          fas
+                          icon="star"
+                          size="sm"
+                          className="text-warning"
+                        />
+                      </li>
+                      <li>
+                        <MDBIcon
+                          fas
+                          icon="star-half-alt"
+                          size="sm"
+                          className="text-warning"
+                        />
+                      </li>
+                    </MDBTypography>
+                  </MDBCol>
+                  <MDBCol lg="4" className="d-none d-lg-block">
+                    <div className="d-flex justify-content-center mb-4">
+                      <img
+                        src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(10).webp"
+                        className="rounded-circle shadow-1-strong"
+                        width="150"
+                        height="150"
+                      />
+                    </div>
+                    <h5 className="mb-3">Maria Kate</h5>
+                    <h6 className="text-primary mb-3">Photographer</h6>
+                    <p className="px-xl-3">
+                      <MDBIcon fas icon="quote-left" className="pe-2" />
+                      At vero eos et accusamus et iusto odio dignissimos ducimus
+                      qui blanditiis praesentium voluptatum deleniti atque
+                      corrupti.
+                    </p>
+                    <MDBTypography
+                      listUnStyled
+                      className="d-flex justify-content-center mb-0"
+                    >
+                      <li>
+                        <MDBIcon
+                          fas
+                          icon="star"
+                          size="sm"
+                          className="text-warning"
+                        />
+                      </li>
+                      <li>
+                        <MDBIcon
+                          fas
+                          icon="star"
+                          size="sm"
+                          className="text-warning"
+                        />
+                      </li>
+                      <li>
+                        <MDBIcon
+                          fas
+                          icon="star"
+                          size="sm"
+                          className="text-warning"
+                        />
+                      </li>
+                      <li>
+                        <MDBIcon
+                          fas
+                          icon="star"
+                          size="sm"
+                          className="text-warning"
+                        />
+                      </li>
+                      <li>
+                        <MDBIcon
+                          far
+                          icon="star"
+                          size="sm"
+                          className="text-warning"
+                        />
+                      </li>
+                    </MDBTypography>
+                  </MDBCol>
+                </MDBRow>
+              </MDBContainer>
+            </MDBCarouselItem>
+            <MDBCarouselItem>
+              <MDBContainer>
+                <MDBRow className="text-center">
+                  <MDBCol lg="4" className="mb-5 mb-md-0">
+                    <div className="d-flex justify-content-center mb-4">
+                      <img
+                        src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(3).webp"
+                        className="rounded-circle shadow-1-strong"
+                        width="150"
+                        height="150"
+                      />
+                    </div>
+                    <h5 className="mb-3">John Doe</h5>
+                    <h6 className="text-primary mb-3">UX Designer</h6>
+                    <p className="px-xl-3">
+                      <MDBIcon fas icon="quote-left" className="pe-2" />
+                      Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                      Quod eos id officiis hic tenetur quae quaerat ad velit ab
+                      hic tenetur.
+                    </p>
+                    <MDBTypography
+                      listUnStyled
+                      className="d-flex justify-content-center mb-0"
+                    >
+                      <li>
+                        <MDBIcon
+                          fas
+                          icon="star"
+                          size="sm"
+                          className="text-warning"
+                        />
+                      </li>
+                      <li>
+                        <MDBIcon
+                          fas
+                          icon="star"
+                          size="sm"
+                          className="text-warning"
+                        />
+                      </li>
+                      <li>
+                        <MDBIcon
+                          fas
+                          icon="star"
+                          size="sm"
+                          className="text-warning"
+                        />
+                      </li>
+                      <li>
+                        <MDBIcon
+                          fas
+                          icon="star"
+                          size="sm"
+                          className="text-warning"
+                        />
+                      </li>
+                      <li>
+                        <MDBIcon
+                          fas
+                          icon="star"
+                          size="sm"
+                          className="text-warning"
+                        />
+                      </li>
+                    </MDBTypography>
+                  </MDBCol>
+                  <MDBCol lg="4" className="d-none d-lg-block">
+                    <div className="d-flex justify-content-center mb-4">
+                      <img
+                        src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(4).webp"
+                        className="rounded-circle shadow-1-strong"
+                        width="150"
+                        height="150"
+                      />
+                    </div>
+                    <h5 className="mb-3">Alex Rey</h5>
+                    <h6 className="text-primary mb-3">Web Developer</h6>
+                    <p className="px-xl-3">
+                      <MDBIcon fas icon="quote-left" className="pe-2" />
+                      Ut enim ad minima veniam, quis nostrum exercitationem ullam
+                      corporis suscipit laboriosam, nisi ut aliquid commodi.
+                    </p>
+                    <MDBTypography
+                      listUnStyled
+                      className="d-flex justify-content-center mb-0"
+                    >
+                      <li>
+                        <MDBIcon
+                          fas
+                          icon="star"
+                          size="sm"
+                          className="text-warning"
+                        />
+                      </li>
+                      <li>
+                        <MDBIcon
+                          fas
+                          icon="star"
+                          size="sm"
+                          className="text-warning"
+                        />
+                      </li>
+                      <li>
+                        <MDBIcon
+                          fas
+                          icon="star"
+                          size="sm"
+                          className="text-warning"
+                        />
+                      </li>
+                      <li>
+                        <MDBIcon
+                          fas
+                          icon="star"
+                          size="sm"
+                          className="text-warning"
+                        />
+                      </li>
+                      <li>
+                        <MDBIcon
+                          fas
+                          icon="star-half-alt"
+                          size="sm"
+                          className="text-warning"
+                        />
+                      </li>
+                    </MDBTypography>
+                  </MDBCol>
+                  <MDBCol lg="4" className="d-none d-lg-block">
+                    <div className="d-flex justify-content-center mb-4">
+                      <img
+                        src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(5).webp"
+                        className="rounded-circle shadow-1-strong"
+                        width="150"
+                        height="150"
+                      />
+                    </div>
+                    <h5 className="mb-3">Maria Kate</h5>
+                    <h6 className="text-primary mb-3">Photographer</h6>
+                    <p className="px-xl-3">
+                      <MDBIcon fas icon="quote-left" className="pe-2" />
+                      At vero eos et accusamus et iusto odio dignissimos ducimus
+                      qui blanditiis praesentium voluptatum deleniti atque
+                      corrupti.
+                    </p>
+                    <MDBTypography
+                      listUnStyled
+                      className="d-flex justify-content-center mb-0"
+                    >
+                      <li>
+                        <MDBIcon
+                          fas
+                          icon="star"
+                          size="sm"
+                          className="text-warning"
+                        />
+                      </li>
+                      <li>
+                        <MDBIcon
+                          fas
+                          icon="star"
+                          size="sm"
+                          className="text-warning"
+                        />
+                      </li>
+                      <li>
+                        <MDBIcon
+                          fas
+                          icon="star"
+                          size="sm"
+                          className="text-warning"
+                        />
+                      </li>
+                      <li>
+                        <MDBIcon
+                          fas
+                          icon="star"
+                          size="sm"
+                          className="text-warning"
+                        />
+                      </li>
+                      <li>
+                        <MDBIcon
+                          far
+                          icon="star"
+                          size="sm"
+                          className="text-warning"
+                        />
+                      </li>
+                    </MDBTypography>
+                  </MDBCol>
+                </MDBRow>
+              </MDBContainer>
+            </MDBCarouselItem>
+            <MDBCarouselItem>
+              <MDBContainer>
+                <MDBRow className="text-center">
+                  <MDBCol lg="4" className="mb-5 mb-md-0">
+                    <div className="d-flex justify-content-center mb-4">
+                      <img
+                        src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(6).webp"
+                        className="rounded-circle shadow-1-strong"
+                        width="150"
+                        height="150"
+                      />
+                    </div>
+                    <h5 className="mb-3">Anna Deynah</h5>
+                    <h6 className="text-primary mb-3">UX Designer</h6>
+                    <p className="px-xl-3">
+                      <MDBIcon fas icon="quote-left" className="pe-2" />
+                      Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                      Quod eos id officiis hic tenetur quae quaerat ad velit ab
+                      hic tenetur.
+                    </p>
+                    <MDBTypography
+                      listUnStyled
+                      className="d-flex justify-content-center mb-0"
+                    >
+                      <li>
+                        <MDBIcon
+                          fas
+                          icon="star"
+                          size="sm"
+                          className="text-warning"
+                        />
+                      </li>
+                      <li>
+                        <MDBIcon
+                          fas
+                          icon="star"
+                          size="sm"
+                          className="text-warning"
+                        />
+                      </li>
+                      <li>
+                        <MDBIcon
+                          fas
+                          icon="star"
+                          size="sm"
+                          className="text-warning"
+                        />
+                      </li>
+                      <li>
+                        <MDBIcon
+                          fas
+                          icon="star"
+                          size="sm"
+                          className="text-warning"
+                        />
+                      </li>
+                      <li>
+                        <MDBIcon
+                          fas
+                          icon="star"
+                          size="sm"
+                          className="text-warning"
+                        />
+                      </li>
+                    </MDBTypography>
+                  </MDBCol>
+                  <MDBCol lg="4" className="d-none d-lg-block">
+                    <div className="d-flex justify-content-center mb-4">
+                      <img
+                        src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(8).webp"
+                        className="rounded-circle shadow-1-strong"
+                        width="150"
+                        height="150"
+                      />
+                    </div>
+                    <h5 className="mb-3">John Doe</h5>
+                    <h6 className="text-primary mb-3">Web Developer</h6>
+                    <p className="px-xl-3">
+                      <MDBIcon fas icon="quote-left" className="pe-2" />
+                      Ut enim ad minima veniam, quis nostrum exercitationem ullam
+                      corporis suscipit laboriosam, nisi ut aliquid commodi.
+                    </p>
+                    <MDBTypography
+                      listUnStyled
+                      className="d-flex justify-content-center mb-0"
+                    >
+                      <li>
+                        <MDBIcon
+                          fas
+                          icon="star"
+                          size="sm"
+                          className="text-warning"
+                        />
+                      </li>
+                      <li>
+                        <MDBIcon
+                          fas
+                          icon="star"
+                          size="sm"
+                          className="text-warning"
+                        />
+                      </li>
+                      <li>
+                        <MDBIcon
+                          fas
+                          icon="star"
+                          size="sm"
+                          className="text-warning"
+                        />
+                      </li>
+                      <li>
+                        <MDBIcon
+                          fas
+                          icon="star"
+                          size="sm"
+                          className="text-warning"
+                        />
+                      </li>
+                      <li>
+                        <MDBIcon
+                          fas
+                          icon="star-half-alt"
+                          size="sm"
+                          className="text-warning"
+                        />
+                      </li>
+                    </MDBTypography>
+                  </MDBCol>
+                  <MDBCol lg="4" className="d-none d-lg-block">
+                    <div className="d-flex justify-content-center mb-4">
+                      <img
+                        src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(7).webp"
+                        className="rounded-circle shadow-1-strong"
+                        width="150"
+                        height="150"
+                      />
+                    </div>
+                    <h5 className="mb-3">Maria Kate</h5>
+                    <h6 className="text-primary mb-3">Photographer</h6>
+                    <p className="px-xl-3">
+                      <MDBIcon fas icon="quote-left" className="pe-2" />
+                      At vero eos et accusamus et iusto odio dignissimos ducimus
+                      qui blanditiis praesentium voluptatum deleniti atque
+                      corrupti.
+                    </p>
+                    <MDBTypography
+                      listUnStyled
+                      className="d-flex justify-content-center mb-0"
+                    >
+                      <li>
+                        <MDBIcon
+                          fas
+                          icon="star"
+                          size="sm"
+                          className="text-warning"
+                        />
+                      </li>
+                      <li>
+                        <MDBIcon
+                          fas
+                          icon="star"
+                          size="sm"
+                          className="text-warning"
+                        />
+                      </li>
+                      <li>
+                        <MDBIcon
+                          fas
+                          icon="star"
+                          size="sm"
+                          className="text-warning"
+                        />
+                      </li>
+                      <li>
+                        <MDBIcon
+                          fas
+                          icon="star"
+                          size="sm"
+                          className="text-warning"
+                        />
+                      </li>
+                      <li>
+                        <MDBIcon
+                          far
+                          icon="star"
+                          size="sm"
+                          className="text-warning"
+                        />
+                      </li>
+                    </MDBTypography>
+                  </MDBCol>
+                </MDBRow>
+              </MDBContainer>
+            </MDBCarouselItem>
+          </MDBCarouselInner>
+        </MDBCarousel>
+      </MDBContainer>
+    );
+  }
