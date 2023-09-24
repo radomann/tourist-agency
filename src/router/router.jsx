@@ -4,6 +4,8 @@ import { Dashboard } from "../admin-panel/pages/Dashboard"
 import { Posts as AdminPanelPosts } from "../admin-panel/pages/Posts"
 import { AboutPage } from "../tourist-site/pages/about"
 import { HomePage } from "../tourist-site/pages/home"
+import { SinglePage } from "../tourist-site/pages/singlepage"
+import { UserPage } from "../tourist-site/pages/user"
 
 export const appRoutes = [
     {
@@ -33,17 +35,17 @@ export const appRoutes = [
                 element: <AboutPage />
             },
             {
-                path: 'home',
+                path: '',
                 element: <HomePage />
             },
-            // {
-            //     path: 'destiantions',
-            //     element: <Destinations />
-            // },
-            // {
-            //     path: 'contact',
-            //     element: <Contact />
-            // }
+            {
+                path: 'single',
+                element: <SinglePage />
+            },
+            {
+                path: 'login',
+                element: <UserPage />
+            }
         ]
     }
 ]

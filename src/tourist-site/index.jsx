@@ -5,8 +5,9 @@ import 'jquery/dist/jquery.min.js'
 import 'bootstrap/dist/js/bootstrap.min.js'
 import 'mdb-react-ui-kit/dist/css/mdb.min.css';
 import "@fortawesome/fontawesome-free/css/all.min.css";
+import "react-image-gallery/styles/css/image-gallery.css";
 import { AppLayout } from './layout';
-// import { HomePage } from './pages/home'
+import { HomePage } from './pages/home'
 // import { AboutPage } from './pages/about';
 
 
@@ -16,7 +17,7 @@ export const App = () => {
   return (
     <>
       { AppLayout }
-      {/* { HomePage } */}
+      <HomePage />
       {/* { AboutPage } */}
     </>
   )
