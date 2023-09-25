@@ -1,8 +1,12 @@
 import { App } from "../tourist-site/index"
 import { AdminPanel } from "../admin-panel/layout"
 import { Dashboard } from "../admin-panel/pages/Dashboard"
-import { Posts as AdminPanelPosts } from "../admin-panel/pages/Posts"
+import { Posts } from "../admin-panel/pages/posts/Posts"
+import { NewPost } from "../admin-panel/pages/posts/NewPost"
+import { Tours } from "../admin-panel/pages/tours/Tours"
+import { NewTour } from "../admin-panel/pages/tours/NewTour"
 import { AboutPage } from "../tourist-site/pages/about"
+import { SignIn } from "../admin-panel/pages/Login"
 
 export const appRoutes = [
     {
@@ -23,9 +27,25 @@ export const appRoutes = [
                     },
                     {
                         path: 'posts',
-                        element: <AdminPanelPosts />
+                        element: <Posts />
+                    },
+                    {
+                        path: 'new-post',
+                        element: <NewPost />
+                    },
+                    {
+                        path: 'tours',
+                        element: <Tours />,
+                    },
+                    {
+                        path: 'new-tour',
+                        element: <NewTour />
                     }
                 ]
+            },
+            {
+                path: 'login',
+                element: <SignIn />
             },
             {
                 path: 'about',

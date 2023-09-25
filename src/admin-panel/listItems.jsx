@@ -5,11 +5,9 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import ListSubheader from '@mui/material/ListSubheader';
 import DashboardIcon from '@mui/icons-material/Dashboard';
-import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-import PeopleIcon from '@mui/icons-material/People';
-import BarChartIcon from '@mui/icons-material/BarChart';
-import LayersIcon from '@mui/icons-material/Layers';
 import AssignmentIcon from '@mui/icons-material/Assignment';
+import TravelExploreIcon from '@mui/icons-material/TravelExplore';
+import ArticleIcon from '@mui/icons-material/Article';
 
 export const mainListItems = (
   <React.Fragment>
@@ -22,22 +20,25 @@ export const mainListItems = (
       </ListItemButton>
     </NavLink>
 
+    <NavLink to="tours">
+    <ListItemButton>
+      <ListItemIcon>
+        <TravelExploreIcon />
+      </ListItemIcon>
+      <ListItemText primary="Tours" />
+    </ListItemButton>
+    </NavLink>
+
     <NavLink to="posts">
       <ListItemButton>
         <ListItemIcon>
-          <ShoppingCartIcon />
+          <ArticleIcon />
         </ListItemIcon>
           <ListItemText primary="Posts" />
       </ListItemButton>
     </NavLink>
 
-    <ListItemButton>
-      <ListItemIcon>
-        <PeopleIcon />
-      </ListItemIcon>
-      <ListItemText primary="Customers" />
-    </ListItemButton>
-    <ListItemButton>
+    {/* <ListItemButton>
       <ListItemIcon>
         <BarChartIcon />
       </ListItemIcon>
@@ -48,7 +49,7 @@ export const mainListItems = (
         <LayersIcon />
       </ListItemIcon>
       <ListItemText primary="Integrations" />
-    </ListItemButton>
+    </ListItemButton> */}
   </React.Fragment>
 );
 
