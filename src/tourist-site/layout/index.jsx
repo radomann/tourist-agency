@@ -21,12 +21,25 @@ export const AppLayout =
                         <NavLink to="/about" className="nav-item nav-link">
                             About
                         </NavLink>
-                        <NavLink to="/single" className="nav-item nav-link">
+                        {/* <NavLink to="/single" className="nav-item nav-link">
                             Single
-                        </NavLink>
+                        </NavLink> */}
+                        {/* TODO fix if is single page to be active Home nav */}
                         <NavLink to="/about" className="nav-item nav-link">
                             Contact
                         </NavLink>
+                    </div>
+                    {/* TODO user photo recive, hidde this if is not logedin */}
+                    {/* TODO fix user photo only exist on Home page */}
+                    <div className="nav-item dropdown">
+                        <NavLink to="#" className="nav-link" data-bs-toggle="dropdown">
+                            <img src="img/team-4.jpg" className="rounded-circle" style={{width: "30px"}} alt="" />
+                        </NavLink>
+                        <div className="dropdown-menu m-0">
+                            <NavLink to="/profil" className="dropdown-item">Profil edit</NavLink>
+                            <NavLink to="#" className="dropdown-item">My reservation</NavLink>
+                            <NavLink to="/logout" className="dropdown-item">Logout</NavLink>
+                        </div>
                     </div>
                     {/* TODO handle if iz login to logout, if is not login to regiser or login */}
                     <NavLink to="/login" className="btn btn-primary rounded-pill py-2 px-4">

@@ -49,6 +49,7 @@ return (
                                         className="form-control bg-transparent w-100 py-3"
                                         type="text"
                                         name="destination"
+                                        id="destination"
                                         placeholder="Enter destination"
                                         value={destionation}
                                         onChange={event => handleInputChange(event, setDestionation)}

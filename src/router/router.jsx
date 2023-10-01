@@ -6,6 +6,7 @@ import { AboutPage } from "../tourist-site/pages/about"
 import { HomePage } from "../tourist-site/pages/home"
 import { SinglePage } from "../tourist-site/pages/singlepage"
 import { UserPage } from "../tourist-site/pages/user"
+import { UserProfil } from "../tourist-site/pages/user/profil"
 
 export const appRoutes = [
     {
@@ -39,12 +40,16 @@ export const appRoutes = [
                 element: <HomePage />
             },
             {
-                path: 'single',
+                path: 'single/:id',
                 element: <SinglePage />
             },
             {
                 path: 'login',
                 element: <UserPage />
+            },
+            {
+                path: 'profil',
+                element: <UserProfil />
             }
         ]
     }

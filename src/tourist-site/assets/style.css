@@ -11,7 +11,21 @@ body {
     text-transform: uppercase;
 }
 
+/* TODO srediti ovaj naziv ako se bude koristio */
+.test {
+    width: "50px";
+    height: "50px";
+}
 
+/* TODO ako ne budem ovo koristio brisati */
+.hiddenItem{
+    display: none;
+}
+
+.img-card {
+    max-width: auto;
+    height: 300px;
+}
 /*** Destination ***/
 
 

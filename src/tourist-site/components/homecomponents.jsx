@@ -10,17 +10,17 @@ import {
     MDBRow,
   } from "mdb-react-ui-kit";
 
-export const Card = ({ name, description, price, image }) => (
+export const Card = ({ id, title, description, price, duration, image }) => (
 
 
 <div className="col-lg-4 col-md-6">
                     <div className="package-item">
                         <div className="overflow-hidden">
-                            <img className="img-fluid" src={image} alt="" />
+                            <img className="img-fluid img-card" src={image} alt="" />
                         </div>
                         <div className="d-flex border-bottom">
-                            <small className="flex-fill text-center border-end py-2"><i className="fa fa-map-marker-alt text-primary me-2"></i>{name}</small>
-                            <small className="flex-fill text-center border-end py-2"><i className="fa fa-calendar-alt text-primary me-2"></i>3 days</small>
+                            <small className="flex-fill text-center border-end py-2"><i className="fa fa-map-marker-alt text-primary me-2"></i>{title}</small>
+                            <small className="flex-fill text-center border-end py-2"><i className="fa fa-calendar-alt text-primary me-2"></i>{duration} days</small>
                             <small className="flex-fill text-center py-2"><i className="fa fa-user text-primary me-2"></i>2 Person</small>
                         </div>
                         <div className="text-center p-4">
@@ -32,9 +32,10 @@ export const Card = ({ name, description, price, image }) => (
                                 <small className="fa fa-star text-primary"></small>
                                 <small className="fa fa-star text-primary"></small>
                             </div>
-                            <p>{description}</p>
+                            <p>{description.substring(0, 60)}...</p>
                             <div className="d-flex justify-content-center mb-2">
-                                <NavLink to="/single" className="btn btn-sm btn-primary px-3 border-end buttonRadiusLeft">Read More</NavLink>
+                                <NavLink to={'/single/' + id}  className="btn btn-sm btn-primary px-3 border-end buttonRadiusLeft">Read More</NavLink>
+                               {/* TODO implement reservation */}
                                 <NavLink to="" className="btn btn-sm btn-primary px-3 buttonRadiusRight">Book Now</NavLink>
                             </div>
                         </div>
@@ -46,135 +47,76 @@ export const Card = ({ name, description, price, image }) => (
 
 export const Testimonial3 = 
 <>
-<div className="carousel-item active">
-      <div className="container">
-        <div className="row">
-          <div className="col-lg-4">
-            <img className="rounded-circle shadow-1-strong mb-4 imgSize"
-              src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(1).webp" alt="avatar" />
-            <h5 className="mb-3">Anna Deynah</h5>
-            <p>UX Designer</p>
-            <p className="text-muted">
-              <i className="fas fa-quote-left pe-2"></i>
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod eos id
-              officiis hic tenetur quae quaerat ad velit ab hic tenetur.
-            </p>
-            <ul className="list-unstyled d-flex justify-content-center text-warning mb-0">
-              <li><i className="fas fa-star fa-sm"></i></li>
-              <li><i className="fas fa-star fa-sm"></i></li>
-              <li><i className="fas fa-star fa-sm"></i></li>
-              <li><i className="fas fa-star fa-sm"></i></li>
-              <li><i className="fas fa-star fa-sm"></i></li>
-            </ul>
-          </div>
+<section>
+  {/* <div className="row d-flex justify-content-center">
+    <div className="col-md-10 col-xl-8 text-center">
+      <h3 className="mb-4">Testimonials</h3>
+      <p className="mb-4 pb-2 mb-md-5 pb-md-0">
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit, error amet
+        numquam iure provident voluptate esse quasi, veritatis totam voluptas nostrum
+        quisquam eum porro a pariatur veniam.
+      </p>
+    </div>
+  </div> */}
 
-          <div className="col-lg-4 d-none d-lg-block">
-            <img className="rounded-circle shadow-1-strong mb-4 imgSize"
-              src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(32).webp" alt="avatar" />
-            <h5 className="mb-3">John Doe</h5>
-            <p>Web Developer</p>
-            <p className="text-muted">
-              <i className="fas fa-quote-left pe-2"></i>
-              Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis
-              suscipit laboriosam, nisi ut aliquid commodi.
-            </p>
-            <ul className="list-unstyled d-flex justify-content-center text-warning mb-0">
-              <li><i className="fas fa-star fa-sm"></i></li>
-              <li><i className="fas fa-star fa-sm"></i></li>
-              <li><i className="fas fa-star fa-sm"></i></li>
-              <li><i className="fas fa-star fa-sm"></i></li>
-              <li>
-                <i className="fas fa-star-half-alt fa-sm"></i>
-              </li>
-            </ul>
-          </div>
-
-          <div className="col-lg-4 d-none d-lg-block">
-            <img className="rounded-circle shadow-1-strong mb-4 imgSize"
-              src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(10).webp" alt="avatar" />
-            <h5 className="mb-3">Maria Kate</h5>
-            <p>Photographer</p>
-            <p className="text-muted">
-              <i className="fas fa-quote-left pe-2"></i>
-              At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis
-              praesentium voluptatum deleniti atque corrupti.
-            </p>
-            <ul className="list-unstyled d-flex justify-content-center text-warning mb-0">
-              <li><i className="fas fa-star fa-sm"></i></li>
-              <li><i className="fas fa-star fa-sm"></i></li>
-              <li><i className="fas fa-star fa-sm"></i></li>
-              <li><i className="fas fa-star fa-sm"></i></li>
-              <li><i className="far fa-star fa-sm"></i></li>
-            </ul>
-          </div>
+  <div className="row text-center">
+    <div className="col-md-4 mb-5 mb-md-0">
+      <div className="card testimonial-card">
+        <div className="card-up"></div>
+        <div className="avatar mx-auto bg-white">
+          <img src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(1).webp"
+            className="rounded-circle img-fluid" style={{maxWidth: "50%"}} />
         </div>
-      </div>
-    </div>  
-
-    <div className="carousel-item">
-      <div className="container">
-        <div className="row">
-          <div className="col-lg-4">
-            <img className="rounded-circle shadow-1-strong mb-4 imgSize"
-              src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(3).webp" alt="avatar" />
-            <h5 className="mb-3">John Doe</h5>
-            <p>UX Designer</p>
-            <p className="text-muted">
-              <i className="fas fa-quote-left pe-2"></i>
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod eos id
-              officiis hic tenetur quae quaerat ad velit ab hic tenetur.
-            </p>
-            <ul className="list-unstyled d-flex justify-content-center text-warning mb-0">
-              <li><i className="fas fa-star fa-sm"></i></li>
-              <li><i className="fas fa-star fa-sm"></i></li>
-              <li><i className="fas fa-star fa-sm"></i></li>
-              <li><i className="fas fa-star fa-sm"></i></li>
-              <li><i className="fas fa-star fa-sm"></i></li>
-            </ul>
-          </div>
-
-          <div className="col-lg-4 d-none d-lg-block">
-            <img className="rounded-circle shadow-1-strong mb-4 imgSize"
-              src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(4).webp" alt="avatar" />
-            <h5 className="mb-3">Alex Rey</h5>
-            <p>Web Developer</p>
-            <p className="text-muted">
-              <i className="fas fa-quote-left pe-2"></i>
-              Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis
-              suscipit laboriosam, nisi ut aliquid commodi.
-            </p>
-            <ul className="list-unstyled d-flex justify-content-center text-warning mb-0">
-              <li><i className="fas fa-star fa-sm"></i></li>
-              <li><i className="fas fa-star fa-sm"></i></li>
-              <li><i className="fas fa-star fa-sm"></i></li>
-              <li><i className="fas fa-star fa-sm"></i></li>
-              <li>
-                <i className="fas fa-star-half-alt fa-sm"></i>
-              </li>
-            </ul>
-          </div>
-
-          <div className="col-lg-4 d-none d-lg-block">
-            <img className="rounded-circle shadow-1-strong mb-4 imgSize"
-              src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(5).webp" alt="avatar" />
-            <h5 className="mb-3">Maria Kate</h5>
-            <p>Photographer</p>
-            <p className="text-muted">
-              <i className="fas fa-quote-left pe-2"></i>
-              At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis
-              praesentium voluptatum deleniti atque corrupti.
-            </p>
-            <ul className="list-unstyled d-flex justify-content-center text-warning mb-0">
-              <li><i className="fas fa-star fa-sm"></i></li>
-              <li><i className="fas fa-star fa-sm"></i></li>
-              <li><i className="fas fa-star fa-sm"></i></li>
-              <li><i className="fas fa-star fa-sm"></i></li>
-              <li><i className="far fa-star fa-sm"></i></li>
-            </ul>
-          </div>
+        <div className="card-body">
+          <h4 className="mb-4">Maria Smantha</h4>
+          <hr />
+          <p className="dark-grey-text mt-4">
+            <i className="fas fa-quote-left pe-2"></i>Lorem ipsum dolor sit amet eos adipisci,
+            consectetur adipisicing elit. Lorem ipsum dolor sit amet eos adipisci,
+            consectetur adipisicing elit. Lorem ipsum dolor sit amet eos adipisci,
+            consectetur adipisicing elit.Lorem ipsum dolor sit amet eos adipisci,
+            consectetur adipisicing elit.Lorem ipsum dolor sit amet eos adipisci,
+            consectetur adipisicing elit.
+          </p>
         </div>
       </div>
     </div>
+    <div className="col-md-4 mb-5 mb-md-0">
+      <div className="card testimonial-card">
+        <div className="card-up"></div>
+        <div className="avatar mx-auto bg-white">
+          <img src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(2).webp"
+            className="rounded-circle img-fluid" style={{maxWidth: "50%"}} />
+        </div>
+        <div className="card-body">
+          <h4 className="mb-4">Lisa Cudrow</h4>
+          <hr />
+          <p className="dark-grey-text mt-4">
+            <i className="fas fa-quote-left pe-2"></i>Neque cupiditate assumenda in maiores
+            repudi mollitia architecto.
+          </p>
+        </div>
+      </div>
+    </div>
+    <div className="col-md-4 mb-0">
+      <div className="card testimonial-card">
+        <div className="card-up"></div>
+        <div className="avatar mx-auto bg-white">
+          <img src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(9).webp"
+            className="rounded-circle img-fluid" style={{maxWidth: "50%"}} />
+        </div>
+        <div className="card-body">
+          <h4 className="mb-4">John Smith</h4>
+          <hr />
+          <p className="dark-grey-text mt-4">
+            <i className="fas fa-quote-left pe-2"></i>Delectus impedit saepe officiis ab
+            aliquam repellat rem unde ducimus.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 </>
 
 export const CoruselNavigation = 
