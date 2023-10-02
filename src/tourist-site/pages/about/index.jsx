@@ -3,7 +3,7 @@ import { AppLayout } from "../../layout"
 export const AboutPage = () => {
     return (
         <>
-            {AppLayout}
+            <AppLayout />
                 <div>About page</div>
             </>
     )

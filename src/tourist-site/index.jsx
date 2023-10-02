@@ -6,22 +6,19 @@ import 'bootstrap/dist/js/bootstrap.min.js'
 import 'mdb-react-ui-kit/dist/css/mdb.min.css';
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import "react-image-gallery/styles/css/image-gallery.css";
-import { UserProvider } from '../context/UserContextnew'
+import { UserProvider } from '../context/UserContext'
 import { AppLayout } from './layout';
 import { HomePage } from './pages/home'
-// import { AboutPage } from './pages/about';
-
+import { appRoutes } from '../router/router';
+import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 
 export const App = () => {
-  const [count, setCount] = useState(0);
+  const router = createBrowserRouter(appRoutes);
 
   return (
     <>
-    {/* <UserProvider> */}
-      { AppLayout }
-      <HomePage />
-      {/* { AboutPage } */}
-    {/* </UserProvider> */}
+    <AppLayout />
+    <HomePage /> 
     </>
   )
 }

@@ -7,6 +7,7 @@ import { HomePage } from "../tourist-site/pages/home"
 import { SinglePage } from "../tourist-site/pages/singlepage"
 import { UserPage } from "../tourist-site/pages/user"
 import { UserProfil } from "../tourist-site/pages/user/profil"
+import { ProtectedRoute, PublicRoute } from './Routes';
 
 export const appRoutes = [
     {
@@ -14,7 +15,7 @@ export const appRoutes = [
         children: [
             {
                 index: true,
-                element: <App />,
+                element: <PublicRoute element={<App />} />,
             },
             {
                 path: 'admin',
@@ -45,11 +46,11 @@ export const appRoutes = [
             },
             {
                 path: 'login',
-                element: <UserPage />
+                element: <PublicRoute element={<UserPage />} />
             },
             {
                 path: 'profil',
-                element: <UserProfil />
+                element: <ProtectedRoute element={<UserProfil />} />
             }
         ]
     }

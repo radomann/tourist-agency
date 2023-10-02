@@ -12,7 +12,6 @@ import {
 
 export const Card = ({ id, title, description, price, duration, image }) => (
 
-
 <div className="col-lg-4 col-md-6">
                     <div className="package-item">
                         <div className="overflow-hidden">
@@ -36,7 +35,15 @@ export const Card = ({ id, title, description, price, duration, image }) => (
                             <div className="d-flex justify-content-center mb-2">
                                 <NavLink to={'/single/' + id}  className="btn btn-sm btn-primary px-3 border-end buttonRadiusLeft">Read More</NavLink>
                                {/* TODO implement reservation */}
-                                <NavLink to="" className="btn btn-sm btn-primary px-3 buttonRadiusRight">Book Now</NavLink>
+                               {/* {user?.user_id ? 
+                               (
+                                <NavLink to="/login" className="btn btn-sm btn-primary px-3 buttonRadiusRight">Login to book</NavLink>
+                                 )
+                                :
+                                (  */}
+                                  <NavLink to="" className="btn btn-sm btn-primary px-3 buttonRadiusRight">Book Now</NavLink>
+                                  {/* )
+                                } */}
                             </div>
                         </div>
                     </div>
@@ -45,79 +52,26 @@ export const Card = ({ id, title, description, price, duration, image }) => (
 );
 
 
-export const Testimonial3 = 
+export const Testimonial3 = ({ description, user, image }) => (
 <>
-<section>
-  {/* <div className="row d-flex justify-content-center">
-    <div className="col-md-10 col-xl-8 text-center">
-      <h3 className="mb-4">Testimonials</h3>
-      <p className="mb-4 pb-2 mb-md-5 pb-md-0">
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit, error amet
-        numquam iure provident voluptate esse quasi, veritatis totam voluptas nostrum
-        quisquam eum porro a pariatur veniam.
-      </p>
-    </div>
-  </div> */}
-
-  <div className="row text-center">
     <div className="col-md-4 mb-5 mb-md-0">
       <div className="card testimonial-card">
         <div className="card-up"></div>
         <div className="avatar mx-auto bg-white">
-          <img src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(1).webp"
+          <img src={image}
             className="rounded-circle img-fluid" style={{maxWidth: "50%"}} />
         </div>
         <div className="card-body">
-          <h4 className="mb-4">Maria Smantha</h4>
+          <h4 className="mb-4">{user.first_name} {user.last_name}</h4>
           <hr />
           <p className="dark-grey-text mt-4">
-            <i className="fas fa-quote-left pe-2"></i>Lorem ipsum dolor sit amet eos adipisci,
-            consectetur adipisicing elit. Lorem ipsum dolor sit amet eos adipisci,
-            consectetur adipisicing elit. Lorem ipsum dolor sit amet eos adipisci,
-            consectetur adipisicing elit.Lorem ipsum dolor sit amet eos adipisci,
-            consectetur adipisicing elit.Lorem ipsum dolor sit amet eos adipisci,
-            consectetur adipisicing elit.
+            <i className="fas fa-quote-left pe-2"></i>{description}
           </p>
         </div>
       </div>
-    </div>
-    <div className="col-md-4 mb-5 mb-md-0">
-      <div className="card testimonial-card">
-        <div className="card-up"></div>
-        <div className="avatar mx-auto bg-white">
-          <img src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(2).webp"
-            className="rounded-circle img-fluid" style={{maxWidth: "50%"}} />
-        </div>
-        <div className="card-body">
-          <h4 className="mb-4">Lisa Cudrow</h4>
-          <hr />
-          <p className="dark-grey-text mt-4">
-            <i className="fas fa-quote-left pe-2"></i>Neque cupiditate assumenda in maiores
-            repudi mollitia architecto.
-          </p>
-        </div>
-      </div>
-    </div>
-    <div className="col-md-4 mb-0">
-      <div className="card testimonial-card">
-        <div className="card-up"></div>
-        <div className="avatar mx-auto bg-white">
-          <img src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(9).webp"
-            className="rounded-circle img-fluid" style={{maxWidth: "50%"}} />
-        </div>
-        <div className="card-body">
-          <h4 className="mb-4">John Smith</h4>
-          <hr />
-          <p className="dark-grey-text mt-4">
-            <i className="fas fa-quote-left pe-2"></i>Delectus impedit saepe officiis ab
-            aliquam repellat rem unde ducimus.
-          </p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+    </div>    
 </>
+);
 
 export const CoruselNavigation = 
 <>

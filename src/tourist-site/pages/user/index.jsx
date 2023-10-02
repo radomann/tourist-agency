@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react';
 import { useNavigate } from "react-router-dom";
-import {UserContext} from '../../../context/UserContextnew'
+// import {UserContext} from '../../../context/UserContextnew'
 import jwtDecode from "jwt-decode"
 import {
   MDBContainer,
@@ -17,6 +17,7 @@ import {
 from 'mdb-react-ui-kit';
 import { AppLayout } from '../../layout';
 import { authService } from "../../../service/auth";
+import { UserContext } from '../../../context/UserContext';
 
 export const UserPage = () => {
 
@@ -32,8 +33,7 @@ export const UserPage = () => {
 
   const { postRegisterData } = authService;
   const { getLoggedInUser } = authService;
-  // // const { handleUserLogin } = UserProvider;
-  // const { handleUserLogin } = useContext(UserContext);
+  const { handleUserLogin } = useContext(UserContext);
   const [firstname, setFirstname] = useState('');
   const [lastname, setLaststname] = useState('');
   const [email, setEmail] = useState('');
@@ -41,7 +41,7 @@ export const UserPage = () => {
   const [password, setPassword] = useState('');
   const [confirmpassword, setConfirmpassword] = useState('');
   const [error, setError] = useState('');
-  const [valid, setValid] = useState([]);
+  const [valid, setValid] = useState(Array);
   const [data, setData] = useState();
   const navigate = useNavigate();
   const [user, setUser] = useState(
@@ -59,20 +59,18 @@ export const UserPage = () => {
   };
 
 const chackValidation = async (event) =>{
-  setValid([]);
   const isTrue = []
-  if(password === undefined || password === null || password === '') isTrue.push({'password':'Password name is required'})
+  if(password === undefined || password === null || password === '') isTrue.push({'password':'Password is required'})
   if(password !== confirmpassword) isTrue.push({'confirmpassword' : 'confirmpassword need to be equal as password'})
   if(lastname === undefined || lastname === null || lastname === '') isTrue.push({'lastname':'Last name is required'})
   if(firstname === undefined || firstname === null || firstname === '') isTrue.push({'firstname':'First name is required'})
   if(email === undefined || email === null || email === '') isTrue.push({'email':'Email name is required'})
   if(username === undefined || username === null || username === '') isTrue.push({'username':'Username name is required'})
 
-
   setValid(isTrue)
-  console.log('valid je ', valid)
 
-  if(valid.length == 0) registerSubmit(event)
+  if(isTrue.length == 0) registerSubmit(event)
+
 };
 
   const registerSubmit = async event => {
@@ -94,7 +92,6 @@ const chackValidation = async (event) =>{
     try {
       const body = JSON.stringify({username, password});
       const response = await getLoggedInUser(body);
-      console.log(response)
       handleUserLogin(response.data.access);
       navigate('/');
     }
@@ -103,32 +100,9 @@ const chackValidation = async (event) =>{
       }
   };
 
-  const handleUserLogin = token => {
-    const userObject = jwtDecode(token);
-
-    setUser(userObject);
-    localStorage.setItem('token', token);
-  };
-
-// /reservations/ - Samo autentifikovani korisnik moze da dodaje rezervaciju, i gleda svoje rezervacije.
-// user se popunjava automatski, a offer se bira i salje id. 
-// Polja za reservation su id, offer, user
-
-// /testimonials/ - Samo autentifikovani korisnik moze da dodaje,
-// Polja su id, title, description, user
-
-// /top-offers/ - Prikazuje top 3 ponude, bazirano na rezervacijama.
-
-// /api/token/ - Za generisanje tokena
-
-// /register/ - Za dodavanje korisnika
-// Polja za register su id, first_name, last_name, email, username, password
-
   return (
     <>
-    {AppLayout}
-    {/* {(error)? '<div>Error is: '+ {error} + '</div>': ''} */}
-    {/* {(error)? console.log(error.response.data) : ''} */}
+    <AppLayout />
 
     <MDBContainer className="p-3 my-5 d-flex flex-column w-50">
 
@@ -147,69 +121,74 @@ const chackValidation = async (event) =>{
 
       <MDBTabsContent>
 
-        <MDBTabsPane show={justifyActive === 'tab1'}>
+        <MDBTabsPane id='tab1' name='tab1' show={justifyActive === 'tab1'}>
 
           <div className="text-center mb-3">
             <p>Sign in with:</p>
             <p className="text-center mt-3">or:</p>
           </div>
 
-          <MDBInput wrapperClass='mb-4' label='Email address' id='form1' type='email'/>
-          <MDBInput wrapperClass='mb-4' label='Password' id='form2' type='password'/>
+          <MDBInput wrapperClass='mb-4' label='Username' id='form1' name='username' type='text'
+          value={username}
+          onChange={event => handleInputChange(event, setUsername)}
+          />
+          <MDBInput wrapperClass='mb-4' label='Password' id='form2' name='password' type='password' 
+          value={password}
+          onChange={event => handleInputChange(event, setPassword)}
+          />
 
-          <div className="d-flex justify-content-between mx-4 mb-4">
+          {/* <div className="d-flex justify-content-between mx-4 mb-4">
             <MDBCheckbox name='flexCheck' value='' id='flexCheckDefault' label='Remember me' />
             <a href="!#">Forgot password?</a>
-          </div>
+          </div> */}
 
-          <MDBBtn className="mb-4 w-100">Sign in</MDBBtn>
-          <p className="text-center">Not a member? <a href="#!">Register</a></p>
+          <MDBBtn onClick={logIn}  className="mb-4 w-100">Sign in</MDBBtn>
+          {/* <p className="text-center">Not a member? <a href="#!">Register</a></p> */}
 
         </MDBTabsPane>
 
-        <MDBTabsPane show={justifyActive === 'tab2'}>
+        <MDBTabsPane id='tab2' name='tab2' show={justifyActive === 'tab2'}>
 
           <div className="text-center mb-3">
             <p>Sign un with:</p>
           </div>
-
-          {(valid.firstname)? <p className = "text-danger"> <i className="fas fa-exclamation-triangle"></i> {valid.firstname}</p>: ''}
-          {(error.first_name)? <p className = "text-danger"> <i className="fas fa-exclamation-triangle"></i> {error.first_name}</p>: ''}
+          {valid.map((x, i) => x.firstname?<p key={i} className= "text-danger"> <i className="fas fa-exclamation-triangle"></i> {x.firstname}</p>: '' )}
+          {(error.first_name)? <p className="text-danger"> <i className="fas fa-exclamation-triangle"></i> {error.first_name}</p>: ''}
           <MDBInput wrapperClass='mb-4' name="firstname" id='firstname' type='text'
             label='First name'
             value={firstname}
             onChange={event => handleInputChange(event, setFirstname)}
           />
-          {(valid.lastname)? <p className = "text-danger"> <i className="fas fa-exclamation-triangle"></i> {valid.lastname}</p>: ''}
-          {(error.last_name)? <p className = "text-danger"> <i className="fas fa-exclamation-triangle"></i> {error.last_name}</p>: ''}
+          {valid.map((x, i) => x.lastname?<p key={i} className="text-danger"> <i className="fas fa-exclamation-triangle"></i> {x.lastname}</p>: '' )}
+          {(error.last_name)? <p key={i} className="text-danger"> <i className="fas fa-exclamation-triangle"></i> {error.last_name}</p>: ''}
           <MDBInput wrapperClass='mb-4' name='lastname' id='lastname' type='text'
             label='Last name'
             value={lastname}
             onChange={event => handleInputChange(event, setLaststname)}
           />
-          {(valid.username)? <p className = "text-danger"> <i className="fas fa-exclamation-triangle"></i> {valid.username}</p>: ''}
-          {(error.username)? <p className = "text-danger"> <i className="fas fa-exclamation-triangle"></i> {error.username}</p>: ''}
+          {valid.map((x, i) => x.username?<p key={i} className= "text-danger"> <i className="fas fa-exclamation-triangle"></i> {x.username}</p>: '' )}
+          {(error.username)? <p className="text-danger"> <i className="fas fa-exclamation-triangle"></i> {error.username}</p>: ''}
           <MDBInput wrapperClass='mb-4' name='username' id='username' type='text'
             label='Username'
             value={username}
             onChange={event => handleInputChange(event, setUsername)}
           />
-          {(valid.email)? <p className = "text-danger"> <i className="fas fa-exclamation-triangle"></i> {valid.email}</p>: ''}
-          {(error.email)? <p className = "text-danger"> <i className="fas fa-exclamation-triangle"></i> {error.email}</p>: ''}
+          {valid.map((x, i) => x.email?<p key={i} className="text-danger"> <i className="fas fa-exclamation-triangle"></i> {x.email}</p>: '' )}
+          {(error.email)? <p className="text-danger"> <i className="fas fa-exclamation-triangle"></i> {error.email}</p>: ''}
           <MDBInput wrapperClass='mb-4'name='email' id='email' type='email'
           label='Email'
           value={email}
           onChange={event => handleInputChange(event, setEmail)}
           />
-          {(valid.password)? <p className = "text-danger"> <i className="fas fa-exclamation-triangle"></i> {valid.password}</p>: ''}
-          {(error.password)? <p className = "text-danger"> <i className="fas fa-exclamation-triangle"></i> {error.password}</p>: ''}
+          {valid.map((x, i) => x.password?<p key={i} className="text-danger"> <i className="fas fa-exclamation-triangle"></i> {x.password}</p>: '' )}
+          {(error.password)? <p className="text-danger"> <i className="fas fa-exclamation-triangle"></i> {error.password}</p>: ''}
           <MDBInput wrapperClass='mb-4' name='password' id='password' type='password'
           label='Password'
           value={password}
           onChange={event => handleInputChange(event, setPassword)}
           />
-          {(valid.confirmpassword)? <p className = "text-danger"> <i className="fas fa-exclamation-triangle"></i> {valid.confirmpassword}</p>: ''}
-          {(error.confirmpassword)? <p className = "text-danger"> <i className="fas fa-exclamation-triangle"></i> {error.confirmpassword}</p>: ''}
+          {valid.map((x, i) => x.confirmpassword?<p key={i} className="text-danger"> <i className="fas fa-exclamation-triangle"></i> {x.confirmpassword}</p>: '' )}
+          {(error.confirmpassword)? <p className="text-danger"> <i className="fas fa-exclamation-triangle"></i> {error.confirmpassword}</p>: ''}
           <MDBInput wrapperClass='mb-4' name='confirmpassword' id='confirmpassword' 
           label='Confirm password'
           type='password'

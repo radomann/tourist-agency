@@ -33,11 +33,7 @@ export const SinglePage = () => {
   useEffect(() => {
     const fetchAllData = async () => {
       try {
-        console.log(id)
-
         const result = await getAllOffers("/offers/" + id)
-
-        console.log(result)
         setData(result.data)
       } catch (error) {
         setError(error);
@@ -49,15 +45,14 @@ export const SinglePage = () => {
   if (error)
     return <div>Error is: {error.message}</div>
 
-  if (!data)
-    return <div>Error is {error}</div>
+  if (!data) return <div>Error is {error}</div>
 
   return <>
-    {AppLayout}
+    <AppLayout />
     <div className="container-xxl py-5">
       <div className="container">
         <div className="row">
-<div className="col-lg-2"></div>
+          <div className="col-lg-2"></div>
           <div className="col-lg-8" >
             <h6 className="section-title bg-white text-start text-primary pe-3">Destinations</h6>
             <h1 className="mb-4"><span className="text-primary">{data.title}</span></h1>
@@ -67,14 +62,14 @@ export const SinglePage = () => {
             <p className="mb-4">Ova tura traje {data.duration} {data.duration > 1 ? 'dana' : 'dan'}.</p>
             <p className="mb-4">Datum polaska: {data.start_date}.</p>
             <p className="mb-4">Datum povratka: {data.end_date}.</p>
- {/* TODO render images only if they exist */}
-              {/* TODO implement */}
+            {/* TODO render images only if they exist */}
+            {/* TODO implement */}
 
           </div>
           <div className="row">
-              {render(images)}
-            </div>
-          
+            {render(images)}
+          </div>
+
         </div>
       </div>
     </div>
