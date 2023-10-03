@@ -1,7 +1,9 @@
 import { useState } from 'react';
 import { Link } from "react-router-dom";
 import { PostsOrPagesListingGrid } from '../../components/PostsOrPagesListingGrid';
-import Button from '@mui/material/Button';
+import { Box, Tooltip, Button, IconButton } from '@mui/material';
+import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from '@mui/icons-material/Edit';
 
 const columns = [
     { field: 'id', headerName: 'ID', width: 70 },
@@ -22,6 +24,25 @@ const columns = [
       valueGetter: (params) =>
         `${params.row.firstName || ''} ${params.row.lastName || ''}`,
     },
+    {
+      field: "action",
+      headerName: "Action",
+      sortable: false,
+      renderCell: (params) =>
+        <Box>
+          <Tooltip title="Edit">
+            <IconButton onClick={() => editTour(params.row.id)}>
+              <EditIcon />
+            </IconButton>
+          </Tooltip>
+          <Tooltip title="Delete">
+            <IconButton onClick={() => deleteTour(params.row.id)}>
+              <DeleteIcon />
+            </IconButton>
+          </Tooltip>
+        </Box>,
+      
+    }
   ];
   
   const rows = [
@@ -35,6 +56,14 @@ const columns = [
     { id: 8, lastName: 'Frances', firstName: 'Rossini', age: 36 },
     { id: 9, lastName: 'Roxie', firstName: 'Harvey', age: 65 },
   ];
+
+  const editTour = (id) => {
+    console.log('edit', id);
+  }
+
+  const deleteTour = (id) => {
+    console.log('delete', id);
+  }
 
 export const Tours = () => {
     const type = 'tour';

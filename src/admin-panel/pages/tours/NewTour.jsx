@@ -1,5 +1,9 @@
 import { useState, useRef } from 'react';
+import { useParams } from 'react-router-dom';
 import { Box, TextField, Button, InputAdornment } from '@mui/material';
+import PeopleIcon from '@mui/icons-material/People';
+import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
+import LocationOnIcon from '@mui/icons-material/LocationOn';
 import StarterKit from "@tiptap/starter-kit";
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import dayjs from 'dayjs';
@@ -12,11 +16,19 @@ import {
   MenuSelectHeading,
   RichTextEditor,
 } from "mui-tiptap";
+import { Previews } from '../../components/GalleryUpload';
 
 export const NewTour = () => {
-    // console.log(type);
     const rteRef = useRef(null);
     const currentDate = new Date();
+    const params = useParams();
+    let imagesArray = [];
+
+    console.log(params);
+
+    const imagesArrayCallback = (imagesArrayAsProp) => {
+        imagesArray = imagesArrayAsProp;
+    }
 
     return (
         <>
@@ -57,6 +69,9 @@ export const NewTour = () => {
               <TextField
                 id="location"
                 label="Location"
+                InputProps={{
+                    endAdornment: <InputAdornment position="end"><LocationOnIcon/></InputAdornment>,
+                  }}
               />  
 
               <TextField
@@ -66,22 +81,39 @@ export const NewTour = () => {
                 InputProps={{
                   endAdornment: <InputAdornment position="end">€</InputAdornment>,
                 }}
+                sx={{marginLeft: 1}}
               />
 
               <TextField 
                 id="numb-of-people"
                 label="Number of people"
                 type="number"
+                InputProps={{
+                    endAdornment: <InputAdornment position="end"><PeopleIcon/></InputAdornment>,
+                }}
+                sx={{marginLeft: 1}}
               />
 
               <TextField 
                 id="numb-of-days"
                 label="Number of days"
                 type="number"
+                InputProps={{
+                    endAdornment: <InputAdornment position="end"><CalendarMonthIcon/></InputAdornment>,
+                }}
+                sx={{marginLeft: 1}}
               />
             </Box>
 
-              <Button onClick={() => console.log(rteRef.current?.editor?.getHTML())}>
+            <Box sx={{marginTop: 2}}>
+                <h5>Gallery</h5>
+                <Previews imagesCallback={imagesArrayCallback}/>
+            </Box>
+
+              <Button onClick={() => {
+                    console.log(rteRef.current?.editor?.getHTML());
+                    console.log(imagesArray);
+                }}>
                 Log HTML
               </Button>
 

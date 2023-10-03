@@ -10,9 +10,9 @@ export const PostsOrPagesListingGrid = (props) => {
                 rows={props.rows}
                 columns={props.columns}
                 initialState={{
-                pagination: {
-                    paginationModel: { page: 0, pageSize: 5 },
-                },
+                    pagination: {
+                        paginationModel: { page: 0, pageSize: 5 },
+                    },
                 }}
                 pageSizeOptions={[5, 10]}
                 checkboxSelection

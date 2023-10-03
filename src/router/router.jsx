@@ -40,6 +40,10 @@ export const appRoutes = [
                     {
                         path: 'new-tour',
                         element: <NewTour />
+                    },
+                    {
+                        path: 'tours/:slug',
+                        element: <NewTour />
                     }
                 ]
             },
