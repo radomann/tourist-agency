@@ -7,6 +7,11 @@ import { Destinations } from "../admin-panel/pages/destinations/Destinations"
 import { NewDestination } from "../admin-panel/pages/destinations/NewDestination"
 import { AboutPage } from "../tourist-site/pages/about"
 import { SignIn } from "../admin-panel/pages/Login"
+import { HomePage } from "../tourist-site/pages/home"
+import { SinglePage } from "../tourist-site/pages/singlepage"
+import { UserPage } from "../tourist-site/pages/user"
+import { UserProfil } from "../tourist-site/pages/user/profil"
+import { ProtectedRoute, PublicRoute } from './Routes';
 
 export const appRoutes = [
     {
@@ -14,7 +19,7 @@ export const appRoutes = [
         children: [
             {
                 index: true,
-                element: <App />
+                element: <PublicRoute element={<App />} />,
             },
             {
                 path: 'admin',
@@ -55,14 +60,22 @@ export const appRoutes = [
                 path: 'about',
                 element: <AboutPage />
             },
-            // {
-            //     path: 'destiantions',
-            //     element: <Destinations />
-            // },
-            // {
-            //     path: 'contact',
-            //     element: <Contact />
-            // }
+            {
+                path: '',
+                element: <HomePage />
+            },
+            {
+                path: 'single/:id',
+                element: <SinglePage />
+            },
+            {
+                path: 'login',
+                element: <PublicRoute element={<UserPage />} />
+            },
+            {
+                path: 'profil',
+                element: <ProtectedRoute element={<UserProfil />} />
+            }
         ]
     }
 ]

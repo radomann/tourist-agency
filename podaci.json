@@ -1,0 +1,10 @@
+
+[
+        { 'title': 'Thailand', 'image': 'img/package-1.jpg', 'description': 'Lorem ipsum dolor sit amet consectetur adipisicing elit. ', 'price': '1130', 'duration': 2, 'start_date': "1998-12-11", 'end_date': "1998-12-11", 'category': 1 },
+        { 'title': 'Indonesia', 'image': 'img/package-2.jpg', 'description': 'Lorem ipsum dolor sit amet consectetur adipisicing elit. ', 'price': '430', 'duration': 2, 'start_date': "1998-12-11", 'end_date': "1998-12-11", 'category': 1 },
+        { 'title': 'Vall Tores', 'image': 'img/package-2.jpg', 'description': 'Lorem ipsum dolor sit amet consectetur adipisicing elit. ', 'price': '2430', 'duration': 2, 'start_date': "1998-12-11", 'end_date': "1998-12-11", 'category': 2 },
+        { 'title': 'Malesia', 'image': 'img/package-3.jpg', 'description': 'Lorem ipsum dolor sit amet consectetur adipisicing elit. ', 'price': '670', 'duration': 2, 'start_date': "1998-12-11", 'end_date': "1998-12-11", 'category': 1 },
+        { 'title': 'Thenerife', 'image': 'img/package-1.jpg', 'description': 'Lorem ipsum dolor sit amet consectetur adipisicing elit. ', 'price': '830', 'duration': 2, 'start_date': "1998-12-11", 'end_date': "1998-12-11", 'category': 1 },
+        { 'title': 'Majorca', 'image': 'img/package-2.jpg', 'description': 'Lorem ipsum dolor sit amet consectetur adipisicing elit. ', 'price': '2030', 'duration': 2, 'start_date': "1998-12-11", 'end_date': "1998-12-11", 'category': 1 },
+        { 'title': 'Malesia', 'image': 'img/package-3.jpg', 'description': 'Lorem ipsum dolor sit amet consectetur adipisicing elit. ', 'price': '6970', 'duration': 2, 'start_date': "1998-12-11", 'end_date': "1998-12-11", 'category': 1 }
+    ]
