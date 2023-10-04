@@ -20,12 +20,12 @@ export const mainListItems = (
       </ListItemButton>
     </NavLink>
 
-    <NavLink to="tours">
+    <NavLink to="destinations">
     <ListItemButton>
       <ListItemIcon>
         <TravelExploreIcon />
       </ListItemIcon>
-      <ListItemText primary="Tours" />
+      <ListItemText primary="Destinations" />
     </ListItemButton>
     </NavLink>
 

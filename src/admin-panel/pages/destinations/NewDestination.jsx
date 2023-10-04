@@ -18,7 +18,7 @@ import {
 } from "mui-tiptap";
 import { Previews } from '../../components/GalleryUpload';
 
-export const NewTour = () => {
+export const NewDestination = () => {
     const rteRef = useRef(null);
     const currentDate = new Date();
     const params = useParams();

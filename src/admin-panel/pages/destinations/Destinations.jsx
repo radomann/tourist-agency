@@ -1,6 +1,6 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link } from "react-router-dom";
-import { PostsOrPagesListingGrid } from '../../components/PostsOrPagesListingGrid';
+import { ListingGrid } from '../../components/ListingGrid';
 import { Box, Tooltip, Button, IconButton } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
@@ -31,12 +31,12 @@ const columns = [
       renderCell: (params) =>
         <Box>
           <Tooltip title="Edit">
-            <IconButton onClick={() => editTour(params.row.id)}>
+            <IconButton onClick={() => editDestination(params.row.id)}>
               <EditIcon />
             </IconButton>
           </Tooltip>
           <Tooltip title="Delete">
-            <IconButton onClick={() => deleteTour(params.row.id)}>
+            <IconButton onClick={() => deleteDestination(params.row.id)}>
               <DeleteIcon />
             </IconButton>
           </Tooltip>
@@ -57,23 +57,29 @@ const columns = [
     { id: 9, lastName: 'Roxie', firstName: 'Harvey', age: 65 },
   ];
 
-  const editTour = (id) => {
+  const editDestination = (id) => {
     console.log('edit', id);
   }
 
-  const deleteTour = (id) => {
+  const deleteDestination = (id) => {
     console.log('delete', id);
   }
 
-export const Tours = () => {
-    const type = 'tour';
+export const Destinations = () => {
+    const type = 'destination';
+
+    useEffect(() => {
+      const fetchDestinations = () => {
+        
+      }
+    }, [])
 
     return (
         <>
-            <Link to="/admin/new-tour">
-              <Button variant="contained" style={{marginBottom: '5px'}}>Add tour</Button>
+            <Link to="/admin/new-destination">
+              <Button variant="contained" style={{marginBottom: '5px'}}>Add destination</Button>
             </Link>
-            <PostsOrPagesListingGrid columns={columns} rows={rows}/>
+            <ListingGrid columns={columns} rows={rows}/>
         </>
     )
 }

@@ -3,8 +3,8 @@ import { AdminPanel } from "../admin-panel/layout"
 import { Dashboard } from "../admin-panel/pages/Dashboard"
 import { Posts } from "../admin-panel/pages/posts/Posts"
 import { NewPost } from "../admin-panel/pages/posts/NewPost"
-import { Tours } from "../admin-panel/pages/tours/Tours"
-import { NewTour } from "../admin-panel/pages/tours/NewTour"
+import { Destinations } from "../admin-panel/pages/destinations/Destinations"
+import { NewDestination } from "../admin-panel/pages/destinations/NewDestination"
 import { AboutPage } from "../tourist-site/pages/about"
 import { SignIn } from "../admin-panel/pages/Login"
 
@@ -34,16 +34,16 @@ export const appRoutes = [
                         element: <NewPost />
                     },
                     {
-                        path: 'tours',
-                        element: <Tours />,
+                        path: 'destinations',
+                        element: <Destinations />,
                     },
                     {
-                        path: 'new-tour',
-                        element: <NewTour />
+                        path: 'new-destination',
+                        element: <NewDestination />
                     },
                     {
-                        path: 'tours/:slug',
-                        element: <NewTour />
+                        path: 'destination/:id',
+                        element: <NewDestination />
                     }
                 ]
             },
