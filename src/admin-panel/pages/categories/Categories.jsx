@@ -9,39 +9,39 @@ import { Link } from "react-router-dom";
 
 const { getAllCategories } = touristServices;
 
-const columns = [
-    { field: 'id', headerName: 'ID', width: 70 },
-    { field: 'name', headerName: 'Name', width: 200 },
-    {
-      field: "action",
-      headerName: "Action",
-      sortable: false,
-      renderCell: (params) =>
-        <Box>
-          <Tooltip title="Edit">
-            <IconButton onClick={() => editCategory(params.row.id)}>
-              <EditIcon />
-            </IconButton>
-          </Tooltip>
-          <Tooltip title="Delete">
-            <IconButton onClick={() => deleteCategory(params.row.id)}>
-              <DeleteIcon />
-            </IconButton>
-          </Tooltip>
-        </Box>      
-    }
-  ];
-
-const editCategory = (id) => {
-    window.location.href = `/admin/categories/${id}`;
-}
-
-const deleteCategory = (id) => {
-    // zavrsiti detele
-}
-
 export const Categories = () => {
+    const columns = [
+        { field: 'id', headerName: 'ID', width: 70 },
+        { field: 'name', headerName: 'Name', width: 200 },
+        {
+          field: "action",
+          headerName: "Action",
+          sortable: false,
+          renderCell: (params) =>
+            <Box>
+              <Tooltip title="Edit">
+                <IconButton onClick={() => handleEditCategory(params.row.id)}>
+                  <EditIcon />
+                </IconButton>
+              </Tooltip>
+              <Tooltip title="Delete">
+                <IconButton onClick={() => handleDeleteCategory(params.row.id)}>
+                  <DeleteIcon />
+                </IconButton>
+              </Tooltip>
+            </Box>      
+        }
+      ];
+
     const [categories, setCategories] = useState([]);
+    
+    const handleEditCategory = (id) => {
+        window.location.href = `/admin/categories/${id}`;
+    }
+    
+    const handleDeleteCategory = (id) => {
+        // zavrsiti detele
+    }
 
     const fetchCategories = async () => {
 
