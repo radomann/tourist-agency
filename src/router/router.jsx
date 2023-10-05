@@ -4,14 +4,15 @@ import { Dashboard } from "../admin-panel/pages/Dashboard"
 import { Posts } from "../admin-panel/pages/posts/Posts"
 import { NewPost } from "../admin-panel/pages/posts/NewPost"
 import { Destinations } from "../admin-panel/pages/destinations/Destinations"
-import { NewDestination } from "../admin-panel/pages/destinations/NewDestination"
+import { NewOrEditDestination } from "../admin-panel/pages/destinations/NewOrEditDestination"
+import { Categories } from "../admin-panel/pages/categories/Categories"
 import { AboutPage } from "../tourist-site/pages/about"
-import { SignIn } from "../admin-panel/pages/Login"
 import { HomePage } from "../tourist-site/pages/home"
 import { SinglePage } from "../tourist-site/pages/singlepage"
 import { UserPage } from "../tourist-site/pages/user"
 import { UserProfil } from "../tourist-site/pages/user/profil"
 import { ProtectedRoute, PublicRoute } from './Routes';
+import { NewOrEditCategory } from "../admin-panel/pages/categories/NewOrEditCategory"
 
 export const appRoutes = [
     {
@@ -44,17 +45,25 @@ export const appRoutes = [
                     },
                     {
                         path: 'new-destination',
-                        element: <NewDestination />
+                        element: <NewOrEditDestination />
                     },
                     {
                         path: 'destination/:id',
-                        element: <NewDestination />
+                        element: <NewOrEditDestination />
+                    },
+                    {
+                        path: 'categories',
+                        element: <Categories />
+                    },
+                    {
+                        path: 'new-category',
+                        element: <NewOrEditCategory />
+                    },
+                    {
+                        path: 'categories/:id',
+                        element: <NewOrEditCategory />
                     }
                 ]
-            },
-            {
-                path: 'login',
-                element: <SignIn />
             },
             {
                 path: 'about',

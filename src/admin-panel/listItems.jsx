@@ -8,6 +8,7 @@ import DashboardIcon from '@mui/icons-material/Dashboard';
 import AssignmentIcon from '@mui/icons-material/Assignment';
 import TravelExploreIcon from '@mui/icons-material/TravelExplore';
 import ArticleIcon from '@mui/icons-material/Article';
+import CategoryIcon from '@mui/icons-material/Category';
 
 export const mainListItems = (
   <React.Fragment>
@@ -26,6 +27,15 @@ export const mainListItems = (
         <TravelExploreIcon />
       </ListItemIcon>
       <ListItemText primary="Destinations" />
+    </ListItemButton>
+    </NavLink>
+
+    <NavLink to="categories">
+    <ListItemButton>
+      <ListItemIcon>
+        <CategoryIcon />
+      </ListItemIcon>
+      <ListItemText primary="Categories" />
     </ListItemButton>
     </NavLink>
 

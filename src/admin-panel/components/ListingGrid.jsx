@@ -2,6 +2,10 @@ import * as React from 'react';
 import { DataGrid } from '@mui/x-data-grid';
 
 export const ListingGrid = (props) => {
+
+    const handleCellClick = (event) => {
+        event.stopPropagation();
+    }
     return (
         <>
             <div style={{ height: 400, width: '100%', backgroundColor: '#fff' }}>
@@ -15,7 +19,7 @@ export const ListingGrid = (props) => {
                     },
                 }}
                 pageSizeOptions={[5, 10]}
-                checkboxSelection
+                disableRowSelectionOnClick
             />
             </div>
         </>

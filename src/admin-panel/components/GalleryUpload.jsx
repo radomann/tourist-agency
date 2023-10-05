@@ -59,7 +59,7 @@ const deleteImg = {
 };
 
 
-export const Previews = (props) => {
+export const GalleryUpload = (props) => {
   const [files, setFiles] = useState([]);
   const {getRootProps, getInputProps} = useDropzone({
     accept: {
@@ -73,6 +73,14 @@ export const Previews = (props) => {
       props.imagesCallback(acceptedFiles);
     }
   });
+
+  // console.log('GalleryUpload', props);
+
+  // if(props.alreadyUploadedImages?.length > 0) {
+  //   setFiles(props.alreadyUploadedImages.map(file => Object.assign(file, {
+  //     preview: URL.createObjectURL(file)
+  //   })));
+  // }
   
   const thumbs = files.map((file, index) => (
     <div style={thumb} key={file.name}>
