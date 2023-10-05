@@ -33,6 +33,7 @@ export const UserPage = () => {
 
   const { postRegisterData } = authService;
   const { getLoggedInUser } = authService;
+  const { getUserDetail } = authService;
   const { handleUserLogin } = useContext(UserContext);
   const [firstname, setFirstname] = useState('');
   const [lastname, setLaststname] = useState('');
@@ -42,13 +43,13 @@ export const UserPage = () => {
   const [confirmpassword, setConfirmpassword] = useState('');
   const [error, setError] = useState('');
   const [valid, setValid] = useState(Array);
-  const [data, setData] = useState();
+  const [userdata, setUserdata] = useState([]);
   const navigate = useNavigate();
-  const [user, setUser] = useState(
-    localStorage.getItem('token')
-      ? jwtDecode(localStorage.getItem('token'))
-      : null
-  );
+  // const [user, setUser] = useState(
+  //   localStorage.getItem('token')
+  //     ? jwtDecode(localStorage.getItem('token'))
+  //     : null
+  // );
 
   const handleInputChange = (event, setState) => {
     const {
@@ -78,7 +79,7 @@ const chackValidation = async (event) =>{
     
     try {
       const body = JSON.stringify({firstname,lastname,email,username, password})
-      console.log(body)
+      // console.log(body)
       const response = await postRegisterData(body)
       setData(response.data)
       logIn(event)
@@ -93,12 +94,28 @@ const chackValidation = async (event) =>{
       const body = JSON.stringify({username, password});
       const response = await getLoggedInUser(body);
       handleUserLogin(response.data.access);
+      userDetail()
+      // navigate('/');
+    }
+   catch (error) {
+        console.log(error);
+      }
+  };
+
+  const userDetail = async () => {
+    try {
+      console.log('token je   ', localStorage.getItem('token'))
+      const response = await getUserDetail(localStorage.getItem('token'));
+      setUserdata(response.data)
+      console.log(response.data);
+
       navigate('/');
     }
    catch (error) {
         console.log(error);
       }
   };
+  
 
   return (
     <>

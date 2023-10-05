@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { data } from 'jquery';
 
 const bcUrl = 'http://sreckokreckovic.pythonanywhere.com'
 
@@ -42,5 +43,27 @@ export const registerBackend = axios.create({
   withCredentials: false,
   headers: {
     'Content-Type': 'application/json',
+
   },
 });
+
+export const sendToken = axios.create({
+  baseURL: bcUrl,
+  timeout: 5000,
+  withCredentials: false,
+  headers: { 
+    'Content-Type': 'application/json',
+  },
+});
+
+// export const getDetail = () => axios.use({
+//     method: 'get',
+//     maxBodyLength: Infinity,
+//     url: 'http://sreckokreckovic.pythonanywhere.com/api/user/profile/',
+//     headers: { 
+//       'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjk2NTQxNDk2LCJpYXQiOjE2OTY1Mzc4OTYsImp0aSI6IjVmNWZkNDUwYjQzOTQ5MWI4YTFiYzk1OWJjZmUwMmEwIiwidXNlcl9pZCI6NDR9.Woh_kwzwFMnYgGFZh_yB4kuhongKwvM53BxLJPVJtb0'
+//     }
+  
+
+// })
+

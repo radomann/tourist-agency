@@ -11,6 +11,7 @@ import { AppLayout } from './layout';
 import { HomePage } from './pages/home'
 import { appRoutes } from '../router/router';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
+import { FooterPage } from './layout/footer';
 
 export const App = () => {
   const router = createBrowserRouter(appRoutes);
@@ -19,6 +20,7 @@ export const App = () => {
     <>
     <AppLayout />
     <HomePage /> 
+    <FooterPage />
     </>
   )
 }

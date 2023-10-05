@@ -6,6 +6,7 @@ import { AboutPage } from "../tourist-site/pages/about"
 import { HomePage } from "../tourist-site/pages/home"
 import { SinglePage } from "../tourist-site/pages/singlepage"
 import { UserPage } from "../tourist-site/pages/user"
+import { ContactPage } from "../tourist-site/pages/contact"
 import { UserProfil } from "../tourist-site/pages/user/profil"
 import { ProtectedRoute, PublicRoute } from './Routes';
 
@@ -35,6 +36,10 @@ export const appRoutes = [
             {
                 path: 'about',
                 element: <AboutPage />
+            },
+            {
+                path: 'contact',
+                element: <ContactPage />
             },
             {
                 path: '',

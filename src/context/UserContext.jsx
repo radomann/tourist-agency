@@ -11,7 +11,7 @@ export const UserProvider = ({ children }) => {
       ? jwtDecode(localStorage.getItem('token'))
       : null
   );
-
+  
   const handleUserLogin = token => {
     const userObject = jwtDecode(token);
 

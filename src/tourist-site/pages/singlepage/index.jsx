@@ -4,8 +4,9 @@ import { AppLayout } from "../../layout";
 import { myGallery } from "../../components/imagegallery";
 const { render } = myGallery;
 import { touristServices } from "../../../service/tourist"
+import { FooterPage } from "../../layout/footer";
 
-const { getAllOffers } = touristServices;
+const { getAllDestinations } = touristServices;
 
 
 export const SinglePage = () => {
@@ -33,7 +34,7 @@ export const SinglePage = () => {
   useEffect(() => {
     const fetchAllData = async () => {
       try {
-        const result = await getAllOffers("/offers/" + id)
+        const result = await getAllDestinations("/destinations/" + id)
         setData(result.data)
       } catch (error) {
         setError(error);
@@ -73,5 +74,6 @@ export const SinglePage = () => {
         </div>
       </div>
     </div>
+    <FooterPage />
   </>
 }

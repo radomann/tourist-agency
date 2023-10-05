@@ -1,14 +1,21 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
+import { Navigate, useNavigate } from "react-router-dom";
 import { AppLayout } from '../../layout';
+import { authService } from '../../../service/auth';
 
 export const UserProfil  = () => {
         // const [data, setData] = useState(null)
-    // const [error, setError] = useState(null)
-    // const [error, setError] = useState(null);
+    const [error, setError] = useState(null)
+    const [email, setEmail] = useState('');
+    const [username, setUsername] = useState('');
+    const [first_name, setFirstname] = useState('');
+    const [last_name, setLaststname] = useState('');
     const inputFile = useRef(null) 
     const inputFileInDb = useRef() 
-    const [show, setShow] = useState('none');
-    const [show1, set1Show] = useState();
+  const [userdata, setUserdata] = useState([]);
+  const { getUserDetail } = authService;
+  const { putUserData } = authService;
+  const navigate = useNavigate();
 
     const update = (event) => {
         console.log(event.target.files[0].name)
@@ -25,15 +32,49 @@ export const UserProfil  = () => {
         // const result = changeState()
         // console.log(result);
       };
+      const userDetail = async () => {
+        try {
+          const response = await getUserDetail(localStorage.getItem('token'));
+          setUserdata(response.data)
+          console.log(userdata);
+        //   userdata.map((x, i) => x.firstname? setUsername(x.username): '' )
+          userdata.map((x) => console.log(x) )
+          userdata.map(item => (
+            setEmail(item.email),
+            setUsername(item.username)
+          ))
 
-    const dummy = [
-        { name: 'Thailand', image: 'img/package-1.jpg', description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. ', price: '130' },
-        { name: 'Indonesia', image: 'img/package-2.jpg', description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. ', price: '430' },
-        { name: 'Malesia', image: 'img/package-3.jpg', description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. ', price: '670' },
-        { name: 'Thailand', image: 'img/package-1.jpg', description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. ', price: '130' },
-        { name: 'Indonesia', image: 'img/package-2.jpg', description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. ', price: '430' },
-        { name: 'Malesia', image: 'img/package-3.jpg', description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. ', price: '670' },
-    ];
+          console.log(userdata)
+        }
+       catch (error) {
+            console.log(error);
+          }
+      };
+
+      useEffect(() => {
+        userDetail()
+    }, [])
+
+    const updateData = async (event) => {
+        event.preventDefault()
+        try {
+            const body = JSON.stringify({username,first_name,last_name})
+            // console.log(body)
+            const response = await putUserData(body, localStorage.getItem('token'))
+            navigate('/')
+          } catch (error) {
+            setError(error.response)
+            console.log(error);
+          }
+    }
+    const handleInputChange = (event, setState) => {
+        const {
+          target: { value },
+        } = event;
+    
+        setState(value);
+        console.log(value)
+      };
 return (
 <>
     <AppLayout />
@@ -50,7 +91,7 @@ return (
                         <div className="row g-3">
                             <div className="text-center col-md-12">
                                 <div className="form-floating">
-                                    <img src="img/team-4.jpg" className="rounded-circle imgSize clicable" alt="Avatar"
+                                    <img src="img/testimonial.jpg" className="rounded-circle imgSize clicable" alt="Avatar"
                                     // onClick={chosePicture}
                                     ref={inputFileInDb}
                                     onClick={onButtonClick}
@@ -68,20 +109,40 @@ return (
                             </div> */}
                             <div className="col-md-12">
                                 <div className="form-floating">
-                                    <input type="email" className="form-control" id="email" disabled />
+                                    <input type="email"
+                                    value={email? email : userdata.email}
+                                    // value={userdata.email} 
+                                    onChange={event => handleInputChange(event, setEmail)}
+                                    className="form-control" id="email" disabled />
                                     <label htmlFor="name">Email</label>
-                                </div>
-                            </div>
-                            <div className="col-md-12">
-                                <div className="form-floating">
-                                    <input type="text" className="form-control" id="name" placeholder="Given Name" />
-                                    <label htmlFor="name">Given Name</label>
                                 </div>
                             </div>
                             <div className="col-12">
                                 <div className="form-floating">
-                                    <input type="text" className="form-control" id="surname" placeholder="Surname" />
-                                    <label htmlFor="subject">Surname</label>
+                                    <input type="text" 
+                                    name='username'
+                                    value={username? username : userdata.username}
+                                    onChange={event => handleInputChange(event, setUsername)}
+                                    className="form-control" id="username" placeholder="Username" />
+                                    <label htmlFor="subject">Username</label>
+                                </div>
+                            </div>
+                            <div className="col-md-12">
+                                <div className="form-floating">
+                                    <input type="text" className="form-control" id="first_name" placeholder="First Name"
+                                    value={first_name? first_name : userdata.first_name}
+                                    onChange={event => handleInputChange(event, setFirstname)}
+                                        />
+                                    <label htmlFor="name">First Name</label>
+                                </div>
+                            </div>
+                            <div className="col-12">
+                                <div className="form-floating">
+                                    <input type="text" className="form-control" name='last_name' id="surname" placeholder="Last name"
+                                    value={last_name? last_name : userdata.last_name}
+                                    onChange={event => handleInputChange(event, setLaststname)}
+                                    />
+                                    <label htmlFor="subject">Last name</label>
                                 </div>
                             </div>
                             <div className="col-12">
@@ -97,7 +158,7 @@ return (
                                 </div>
                             </div>
                             <div className="col-12">
-                                <button className="btn btn-primary w-100 py-3" type="submit">Submit</button>
+                                <button onClick={updateData} className="btn btn-primary w-100 py-3" type="submit">Submit</button>
                             </div>
                         </div>
                     </form>
