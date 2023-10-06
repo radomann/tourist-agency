@@ -39,12 +39,12 @@ export const mainListItems = (
     </ListItemButton>
     </NavLink>
 
-    <NavLink to="posts">
+    <NavLink to="testimonials">
       <ListItemButton>
         <ListItemIcon>
           <ArticleIcon />
         </ListItemIcon>
-          <ListItemText primary="Posts" />
+          <ListItemText primary="Testimonials" />
       </ListItemButton>
     </NavLink>
 

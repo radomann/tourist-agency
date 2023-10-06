@@ -4,15 +4,21 @@ import { touristServices } from "../../../service/tourist";
 import { Box, Button, Snackbar, TextField } from "@mui/material";
 import MuiAlert from "@mui/material/Alert";
 
-const { getSingleCategory, submitCategory, editCategory } = touristServices;
+const { getSingleTestimonial, submitTestimonial, editTestimonial } =
+  touristServices;
 
 const Alert = forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
 
-export const NewOrEditCategory = () => {
+export const NewOrEditTestimonial = () => {
   const params = useParams();
-  const [category, setCategory] = useState({ name: "" });
+
+  const [testimonial, setTestimonial] = useState({
+    description: "",
+    first_name: "",
+    last_name: "",
+  });
 
   // alert variables
   const [alertSeverity, setAlertSeverity] = useState();
@@ -23,7 +29,26 @@ export const NewOrEditCategory = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   // variables for input validation
-  const [categoryError, setCategoryError] = useState("");
+  const [firstNameError, setFirstNameError] = useState("");
+  const [lastNameError, setLastNameError] = useState("");
+  const [descError, setDescError] = useState("");
+
+  const fetchTestimonial = async () => {
+    try {
+      const result = await getSingleTestimonial(params.id);
+      const data = result.data;
+
+      setTestimonial(data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  useEffect(() => {
+    if (params?.id) {
+      fetchTestimonial();
+    }
+  }, []);
 
   const handleInputChange = (event, setState, key) => {
     const {
@@ -36,48 +61,55 @@ export const NewOrEditCategory = () => {
     }));
   };
 
-  const fetchCategory = async () => {
-    try {
-      const result = await getSingleCategory(params.id);
-      const data = result.data;
+  const handleAlertClose = () => {
+    setOpenAlert(false);
+  };
 
-      setCategory(data);
-
-      console.log(category);
-    } catch (error) {
-      console.error(error);
+  const validateFirstName = () => {
+    if (!testimonial.first_name) {
+      setFirstNameError("First name is required");
+    } else {
+      setFirstNameError("");
     }
   };
 
-  useEffect(() => {
-    if (params?.id) {
-      fetchCategory();
-    }
-  }, []);
-
-  const validateCategory = () => {
-    if (!category.name) {
-      setCategoryError("Category name is required");
+  const validateLastName = () => {
+    if (!testimonial.last_name) {
+      setLastNameError("Last name is required");
     } else {
-      setCategoryError("");
+      setLastNameError("");
+    }
+  };
+
+  const validateDesc = () => {
+    if (!testimonial.description) {
+      setDescError("Description is required");
+    } else {
+      setDescError("");
     }
   };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    validateCategory();
+    validateFirstName();
+    validateLastName();
+    validateDesc();
 
-    if (!categoryError) {
+    // field validation
+    if (!firstNameError && !lastNameError && !descError) {
       setIsSubmitting(true);
-      // if there is an ID, means category has to be edited
+      // if there is an ID, means testimonial has to be edited
       if (params?.id) {
         try {
-          const response = await editCategory(category);
+          const payload = JSON.stringify(testimonial);
+          const response = await editTestimonial(payload);
+
+          console.log("test edit", payload);
 
           if (response.status === 200) {
             setAlertSeverity("success");
-            setAlertMsg("Category successfuly edited!");
+            setAlertMsg("Testimonial successfuly edited!");
             setOpenAlert(true);
             console.log("Svaka cast");
             setIsSubmitting(false);
@@ -95,8 +127,8 @@ export const NewOrEditCategory = () => {
             errorMessage = error.response.data.message || "An error occurred";
           }
 
-          setAlertMsg(errorMessage);
           setAlertSeverity("error");
+          setAlertMsg(errorMessage);
           setOpenAlert(true);
           console.error(errorMessage);
           setIsSubmitting(false);
@@ -105,12 +137,13 @@ export const NewOrEditCategory = () => {
         return;
       }
 
-      // else just insert new category
+      // else just insert new testimonial
       try {
-        const response = await submitCategory(category);
+        const payload = JSON.stringify(testimonial);
+        const response = await submitTestimonial(payload);
 
         if (response.status === 200) {
-          setAlertMsg("Category successfuly submitted!");
+          setAlertMsg("Testimonial successfuly submitted!");
           setAlertSeverity("success");
           setOpenAlert(true);
           console.log("Svaka cast");
@@ -136,10 +169,6 @@ export const NewOrEditCategory = () => {
         setIsSubmitting(false);
       }
     }
-  };
-
-  const handleAlertClose = () => {
-    setOpenAlert(false);
   };
 
   return (
@@ -173,19 +202,49 @@ export const NewOrEditCategory = () => {
             }}
           >
             <TextField
-              id="name"
-              label="Name"
+              id="firstname"
+              label="First name"
               variant="outlined"
-              sx={{ width: "100%" }}
+              sx={{ width: "100%", marginRight: 1 }}
               onChange={(event) =>
-                handleInputChange(event, setCategory, "name")
+                handleInputChange(event, setTestimonial, "first_name")
               }
-              value={category.name}
-              onBlur={validateCategory}
-              error={!!categoryError}
-              helperText={categoryError}
+              value={testimonial.first_name}
+              onBlur={validateFirstName}
+              error={!!firstNameError}
+              helperText={firstNameError}
+            />
+
+            <TextField
+              id="lastname"
+              label="Last name"
+              variant="outlined"
+              sx={{ width: "100%", marginRight: 1 }}
+              onChange={(event) =>
+                handleInputChange(event, setTestimonial, "last_name")
+              }
+              value={testimonial.last_name}
+              onBlur={validateLastName}
+              error={!!lastNameError}
+              helperText={lastNameError}
             />
           </Box>
+
+          <TextField
+            id="description"
+            label="Description"
+            variant="outlined"
+            multiline
+            maxRows={10}
+            sx={{ width: "100%", marginBottom: 1 }}
+            onChange={(event) =>
+              handleInputChange(event, setTestimonial, "description")
+            }
+            value={testimonial.description}
+            onBlur={validateDesc}
+            error={!!descError}
+            helperText={descError}
+          />
 
           <Button type="submit" variant="contained" disabled={isSubmitting}>
             {isSubmitting ? "Submitting..." : "Submit"}
