@@ -45,11 +45,6 @@ export const UserPage = () => {
   const [valid, setValid] = useState(Array);
   const [userdata, setUserdata] = useState([]);
   const navigate = useNavigate();
-  // const [user, setUser] = useState(
-  //   localStorage.getItem('token')
-  //     ? jwtDecode(localStorage.getItem('token'))
-  //     : null
-  // );
 
   const handleInputChange = (event, setState) => {
     const {
@@ -79,13 +74,11 @@ const chackValidation = async (event) =>{
     
     try {
       const body = JSON.stringify({firstname,lastname,email,username, password})
-      // console.log(body)
       const response = await postRegisterData(body)
       setData(response.data)
       logIn(event)
     } catch (error) {
       setError(error.response.data)
-      console.log(error);
     }
   }
   const logIn = async event => {
@@ -94,28 +87,12 @@ const chackValidation = async (event) =>{
       const body = JSON.stringify({username, password});
       const response = await getLoggedInUser(body);
       handleUserLogin(response.data.access);
-      userDetail()
-      // navigate('/');
-    }
-   catch (error) {
-        console.log(error);
-      }
-  };
-
-  const userDetail = async () => {
-    try {
-      console.log('token je   ', localStorage.getItem('token'))
-      const response = await getUserDetail(localStorage.getItem('token'));
-      setUserdata(response.data)
-      console.log(response.data);
-
       navigate('/');
     }
    catch (error) {
-        console.log(error);
+      setError(error.response.data.detail)
       }
   };
-  
 
   return (
     <>
@@ -144,7 +121,7 @@ const chackValidation = async (event) =>{
             <p>Sign in with:</p>
             <p className="text-center mt-3">or:</p>
           </div>
-
+          {(error)? <p className="text-danger"> <i className="fas fa-exclamation-triangle"></i> {error}</p>: ''}
           <MDBInput wrapperClass='mb-4' label='Username' id='form1' name='username' type='text'
           value={username}
           onChange={event => handleInputChange(event, setUsername)}
@@ -154,13 +131,7 @@ const chackValidation = async (event) =>{
           onChange={event => handleInputChange(event, setPassword)}
           />
 
-          {/* <div className="d-flex justify-content-between mx-4 mb-4">
-            <MDBCheckbox name='flexCheck' value='' id='flexCheckDefault' label='Remember me' />
-            <a href="!#">Forgot password?</a>
-          </div> */}
-
           <MDBBtn onClick={logIn}  className="mb-4 w-100">Sign in</MDBBtn>
-          {/* <p className="text-center">Not a member? <a href="#!">Register</a></p> */}
 
         </MDBTabsPane>
 

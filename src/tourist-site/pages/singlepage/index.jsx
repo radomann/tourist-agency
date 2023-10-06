@@ -11,24 +11,23 @@ const { getAllDestinations } = touristServices;
 
 export const SinglePage = () => {
   const { id } = useParams()
-  const images = [
-    {
-      original: "https://picsum.photos/id/1018/1000/600/",
-      thumbnail: "https://picsum.photos/id/1018/1000/600/",
-    },
-    {
-      original: "https://picsum.photos/id/1015/1000/600/",
-      thumbnail: "https://picsum.photos/id/1015/1000/600/",
-    },
-    {
-      original: "https://picsum.photos/id/1019/1000/600/",
-      thumbnail: "https://picsum.photos/id/1019/1000/600/",
-    },
-  ];
+  // const images = [
+  //   {
+  //     original: "https://picsum.photos/id/1018/1000/600/",
+  //     thumbnail: "https://picsum.photos/id/1018/1000/600/",
+  //   },
+  //   {
+  //     original: "https://picsum.photos/id/1015/1000/600/",
+  //     thumbnail: "https://picsum.photos/id/1015/1000/600/",
+  //   },
+  //   {
+  //     original: "https://picsum.photos/id/1019/1000/600/",
+  //     thumbnail: "https://picsum.photos/id/1019/1000/600/",
+  //   },
+  // ];
 
-  // TODO get destination data and place them in return state
-  // TODO send post image and get gallery. Remove fixed images. 
   const [data, setData] = useState(null)
+  const [img, setImg] = useState([])
   const [error, setError] = useState(null)
 
   useEffect(() => {
@@ -36,6 +35,12 @@ export const SinglePage = () => {
       try {
         const result = await getAllDestinations("/destinations/" + id)
         setData(result.data)
+
+        setImg(result.data.media.map(result => 
+          ({
+            original: result.path,
+            thumbnail: result.path
+          })))
       } catch (error) {
         setError(error);
       }
@@ -64,11 +69,11 @@ export const SinglePage = () => {
             <p className="mb-4">Datum polaska: {data.start_date}.</p>
             <p className="mb-4">Datum povratka: {data.end_date}.</p>
             {/* TODO render images only if they exist */}
-            {/* TODO implement */}
 
           </div>
           <div className="row">
-            {render(images)}
+            {}
+            {render(img)}
           </div>
 
         </div>

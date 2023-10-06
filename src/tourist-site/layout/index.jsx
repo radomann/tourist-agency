@@ -4,8 +4,7 @@ import { NavLink, Outlet } from 'react-router-dom';
 import { UserContext } from '../../context/UserContext';
 
 export const AppLayout = () => {
-    const { user, handleUserLogout } = useContext(UserContext);
-    // console.log(user)
+    const { user, userdetail, handleUserLogout } = useContext(UserContext);
     return (
         <>
             <div className="container-fluid position-relative p-0">
@@ -19,6 +18,13 @@ export const AppLayout = () => {
                     </button>
                     <div className="collapse navbar-collapse" id="navbarCollapse">
                         <div className="navbar-nav ms-auto py-0">
+
+                        {userdetail?.is_superuser ? (
+                            <NavLink to="/admin" className="nav-item nav-link">
+                                Admin
+                            </NavLink>
+                        ) : ('')}
+
                             <NavLink to="/" className="nav-item nav-link">
                                 Home
                             </NavLink>
@@ -31,9 +37,7 @@ export const AppLayout = () => {
                                 Contact
                             </NavLink>
                         </div>
-                        {/* TODO user photo recive, hidde this if is not logedin */}
-                        {/* TODO fix user photo only exist on Home page */}
-                        {user?.user_id ? (
+                        {userdetail?.username ? (
                             <div className="nav-item dropdown">
                                 <NavLink to="#" className="nav-link" data-bs-toggle="dropdown">
                                     <img src="/img/testimonial.jpg" className="rounded-circle" style={{ width: "30px" }} alt="" />
@@ -42,8 +46,6 @@ export const AppLayout = () => {
                                     <NavLink to="/profil" className="dropdown-item">Profil edit</NavLink>
                                     <NavLink to="/reservation" className="dropdown-item">My reservation</NavLink>
                                     <div className="dropdown-divider"></div>
-
-                                    {/* <NavLink to="/logout" className="dropdown-item">Logout</NavLink> */}
                                     <button
                                         className="dropdown-item"
                                         onClick={handleUserLogout}

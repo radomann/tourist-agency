@@ -1,4 +1,4 @@
-import { registerBackend, sendToken, getDetail } from './api';
+import { registerBackend, sendToken } from './api';
 
 class AuthService {
   postRegisterData = async data => await registerBackend.post('/register/', data);

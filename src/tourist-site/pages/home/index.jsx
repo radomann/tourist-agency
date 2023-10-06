@@ -39,7 +39,7 @@ export const HomePage = () => {
             if (result.data.previous === null) setDisabled({ prev: true })
             if (result.data.next === null) setDisabled({ next: true })
 
-            // Kako da odradim da na poziv HOME obrise vrijednosti input polja i select elementa
+            // PITANJE Kako da odradim da na poziv HOME obrise vrijednosti input polja i select elementa
         } catch (error) {
             setError(error);
         }
@@ -149,7 +149,7 @@ export const HomePage = () => {
                 <div className="row g-4 justify-content-center">
                     <section>
                         <div className="row text-center">
-                            {testimonial.map(({ description, user }, index) => <Testimonial3 key={index} description={description} user={user} image={'img/testimonial.jpg'} />)}
+                            {testimonial.map(({ description, first_name, last_name }, index) => <Testimonial3 key={index} description={description} first_name={first_name} last_name={last_name} image={'img/testimonial.jpg'} />)}
                         </div>
                     </section>
                 </div>

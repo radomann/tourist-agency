@@ -8,7 +8,7 @@ import { SinglePage } from "../tourist-site/pages/singlepage"
 import { UserPage } from "../tourist-site/pages/user"
 import { ContactPage } from "../tourist-site/pages/contact"
 import { UserProfil } from "../tourist-site/pages/user/profil"
-import { ProtectedRoute, PublicRoute } from './Routes';
+import { ProtectedRoute, PublicRoute, AdminProtectedRoute } from './Routes';
 
 export const appRoutes = [
     {
@@ -20,7 +20,7 @@ export const appRoutes = [
             },
             {
                 path: 'admin',
-                element: <AdminPanel />,
+                element: <AdminProtectedRoute element={<AdminPanel />} />,
                 children: [
                     {   
                         path: '',

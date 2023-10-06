@@ -43,7 +43,7 @@ export const Card = ({ id, title, description, price, duration, number_of_people
 );
 
 
-export const Testimonial3 = ({ description, user, image }) => (
+export const Testimonial3 = ({ description, first_name, last_name, image }) => (
   <>
     <div className="col-md-4 mb-5 mb-md-0">
       <div className="card testimonial-card">
@@ -53,7 +53,7 @@ export const Testimonial3 = ({ description, user, image }) => (
             className="rounded-circle img-fluid" style={{ maxWidth: "50%" }} />
         </div>
         <div className="card-body">
-          <h4 className="mb-4">{user.first_name} {user.last_name}</h4>
+          <h4 className="mb-4">{first_name} {last_name}</h4>
           <hr />
           <p className="dark-grey-text mt-4">
             <i className="fas fa-quote-left pe-2"></i>{description}
