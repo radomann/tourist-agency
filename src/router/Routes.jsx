@@ -8,6 +8,12 @@ export const ProtectedRoute = ({ element }) => {
   return user?.user_id ? <>{element}</> : <Navigate to="/login" />;
 };
 
+export const AdminProtectedRoute = ({ element }) => {
+  const { userdetail } = useContext(UserContext);
+
+  return userdetail?.is_superuser ? <>{element}</> : <Navigate to="/" />;
+};
+
 export const PublicRoute = ({ element }) => {
   const { user } = useContext(UserContext);
   return user?.userId ? <Navigate to="/" /> : <>{element}</>;

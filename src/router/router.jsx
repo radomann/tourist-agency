@@ -15,6 +15,8 @@ import { ProtectedRoute, PublicRoute } from "./Routes";
 import { NewOrEditCategory } from "../admin-panel/pages/categories/NewOrEditCategory";
 import { Testimonials } from "../admin-panel/pages/testimonials/Testimonials";
 import { NewOrEditTestimonial } from "../admin-panel/pages/testimonials/NewOrEditTestimonial";
+import { AdminPanel } from "../admin-panel/layout";
+import { ProtectedRoute, PublicRoute, AdminProtectedRoute } from "./Routes";
 
 export const appRoutes = [
   {
@@ -26,7 +28,7 @@ export const appRoutes = [
       },
       {
         path: "admin",
-        element: <ProtectedRoute element={<AdminPanel />} />,
+        element: <AdminProtectedRoute element={<AdminPanel />} />,
         children: [
           {
             path: "",
@@ -82,6 +84,10 @@ export const appRoutes = [
       {
         path: "about",
         element: <AboutPage />,
+      },
+      {
+        path: "contact",
+        element: <ContactPage />,
       },
       {
         path: "",
