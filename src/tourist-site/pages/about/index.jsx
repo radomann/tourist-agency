@@ -10,7 +10,7 @@ export const AboutPage = () => {
             <div className="row g-5">
                 <div className="col-lg-6" style={{minHeight: "400px"}}>
                     <div className="position-relative h-100">
-                        <img className="img-fluid position-absolute w-100 h-100" src="img/about.jpg" alt="" style={{objectFit: "cover"}} />
+                        <img className="img-fluid position-absolute w-100 h-100" src="/public/img/about.jpg" alt="" style={{objectFit: "cover"}} />
                     </div>
                 </div>
                 <div className="col-lg-6">
