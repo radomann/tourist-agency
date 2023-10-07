@@ -11,11 +11,10 @@ import { HomePage } from "../tourist-site/pages/home";
 import { SinglePage } from "../tourist-site/pages/singlepage";
 import { UserPage } from "../tourist-site/pages/user";
 import { UserProfil } from "../tourist-site/pages/user/profil";
-import { ProtectedRoute, PublicRoute } from "./Routes";
+import { ContactPage } from "../tourist-site/pages/contact/index";
 import { NewOrEditCategory } from "../admin-panel/pages/categories/NewOrEditCategory";
 import { Testimonials } from "../admin-panel/pages/testimonials/Testimonials";
 import { NewOrEditTestimonial } from "../admin-panel/pages/testimonials/NewOrEditTestimonial";
-import { AdminPanel } from "../admin-panel/layout";
 import { ProtectedRoute, PublicRoute, AdminProtectedRoute } from "./Routes";
 
 export const appRoutes = [
