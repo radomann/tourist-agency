@@ -40,7 +40,7 @@ export const AppLayout = () => {
                         {userdetail?.username ? (
                             <div className="nav-item dropdown">
                                 <NavLink to="#" className="nav-link" data-bs-toggle="dropdown">
-                                    <img src="/img/testimonial.jpg" className="rounded-circle" style={{ width: "30px" }} alt="" />
+                                    <img src="/public/img/testimonial.jpg" className="rounded-circle" style={{ width: "30px" }} alt="" />
                                 </NavLink>
                                 <div className="dropdown-menu m-10">
                                     <NavLink to="/profil" className="dropdown-item">Profil edit</NavLink>
