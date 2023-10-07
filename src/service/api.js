@@ -1,7 +1,7 @@
 import axios from "axios";
 import { data } from "jquery";
 
-const bcUrl = "http://sreckokreckovic.pythonanywhere.com";
+const bcUrl = "https://sreckokreckovic.pythonanywhere.com";
 
 export const axiosInstance = axios.create({
   // baseURL: import.meta.env.REACT_APP_API_BASE_URL,
