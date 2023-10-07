@@ -17,6 +17,7 @@ import {
 from 'mdb-react-ui-kit';
 import { AppLayout } from '../../layout';
 import { authService } from "../../../service/auth";
+// import { touristServices } from "../../../service/tourist";
 import { UserContext } from '../../../context/UserContext';
 
 export const UserPage = () => {
@@ -33,7 +34,7 @@ export const UserPage = () => {
 
   const { postRegisterData } = authService;
   const { getLoggedInUser } = authService;
-  const { getUserDetail } = authService;
+  // const { getUserDetail } = touristServices;
   const { handleUserLogin } = useContext(UserContext);
   const [firstname, setFirstname] = useState('');
   const [lastname, setLaststname] = useState('');
@@ -61,6 +62,7 @@ const chackValidation = async (event) =>{
   if(lastname === undefined || lastname === null || lastname === '') isTrue.push({'lastname':'Last name is required'})
   if(firstname === undefined || firstname === null || firstname === '') isTrue.push({'firstname':'First name is required'})
   if(email === undefined || email === null || email === '') isTrue.push({'email':'Email name is required'})
+  if(!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(email)) isTrue.push({'email':'Invalid email address'})
   if(username === undefined || username === null || username === '') isTrue.push({'username':'Username name is required'})
 
   setValid(isTrue)
@@ -75,9 +77,10 @@ const chackValidation = async (event) =>{
     try {
       const body = JSON.stringify({firstname,lastname,email,username, password})
       const response = await postRegisterData(body)
-      setData(response.data)
+      // setData(response.data)
       logIn(event)
     } catch (error) {
+    console.log(error);
       setError(error.response.data)
     }
   }
@@ -86,10 +89,12 @@ const chackValidation = async (event) =>{
     try {
       const body = JSON.stringify({username, password});
       const response = await getLoggedInUser(body);
+      console.log(response);
       handleUserLogin(response.data.access);
       navigate('/');
     }
    catch (error) {
+    console.log(error);
       setError(error.response.data.detail)
       }
   };

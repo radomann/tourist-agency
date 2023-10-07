@@ -27,6 +27,11 @@ class TouristServices {
     await axiosInstance.delete(`/categories/${id}/`);
   deleteTestimonial = async (id) =>
     await axiosInstance.delete(`/testimonials/${id}/`);
+
+  // getUserDetail = async data => await axiosInstance.get('/api/user/profile/',{ headers: {'Authorization': 'Bearer ' + data}});
+  getUserDetail = async () => await axiosInstance.get("/api/user/profile/");
+  putUserData = async (data) =>
+    await axiosInstance.put("/api/user/profile/", data);
 }
 
 export const touristServices = new TouristServices();

@@ -155,7 +155,7 @@ export const HomePage = () => {
                 </div>
             </div>
         </div>
-        <div className="container-xxl py-5">
+        <div id="bookingform" className="container-xxl py-5">
             <div className="container">
                 {Booking }
             </div>
