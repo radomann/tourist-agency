@@ -1,43 +1,59 @@
-import * as React from 'react';
-import { NavLink } from 'react-router-dom';
-import ListItemButton from '@mui/material/ListItemButton';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemText from '@mui/material/ListItemText';
-import ListSubheader from '@mui/material/ListSubheader';
-import DashboardIcon from '@mui/icons-material/Dashboard';
-import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-import PeopleIcon from '@mui/icons-material/People';
-import BarChartIcon from '@mui/icons-material/BarChart';
-import LayersIcon from '@mui/icons-material/Layers';
-import AssignmentIcon from '@mui/icons-material/Assignment';
+import * as React from "react";
+import { NavLink } from "react-router-dom";
+import ListItemButton from "@mui/material/ListItemButton";
+import ListItemIcon from "@mui/material/ListItemIcon";
+import ListItemText from "@mui/material/ListItemText";
+import ListSubheader from "@mui/material/ListSubheader";
+import DashboardIcon from "@mui/icons-material/Dashboard";
+// import AssignmentIcon from "@mui/icons-material/Assignment";
+import TravelExploreIcon from "@mui/icons-material/TravelExplore";
+import ArticleIcon from "@mui/icons-material/Article";
+import CategoryIcon from "@mui/icons-material/Category";
+import ExitToAppIcon from "@mui/icons-material/ExitToApp";
 
 export const mainListItems = (
   <React.Fragment>
-    <NavLink to=''>
+    <ListSubheader component="div" inset>
+      Admin panel
+    </ListSubheader>
+
+    <NavLink to="">
       <ListItemButton>
         <ListItemIcon>
           <DashboardIcon />
         </ListItemIcon>
-          <ListItemText primary="Dashboard" />
+        <ListItemText primary="Dashboard" />
       </ListItemButton>
     </NavLink>
 
-    <NavLink to="posts">
+    <NavLink to="destinations">
       <ListItemButton>
         <ListItemIcon>
-          <ShoppingCartIcon />
+          <TravelExploreIcon />
         </ListItemIcon>
-          <ListItemText primary="Posts" />
+        <ListItemText primary="Destinations" />
       </ListItemButton>
     </NavLink>
 
-    <ListItemButton>
-      <ListItemIcon>
-        <PeopleIcon />
-      </ListItemIcon>
-      <ListItemText primary="Customers" />
-    </ListItemButton>
-    <ListItemButton>
+    <NavLink to="categories">
+      <ListItemButton>
+        <ListItemIcon>
+          <CategoryIcon />
+        </ListItemIcon>
+        <ListItemText primary="Categories" />
+      </ListItemButton>
+    </NavLink>
+
+    <NavLink to="testimonials">
+      <ListItemButton>
+        <ListItemIcon>
+          <ArticleIcon />
+        </ListItemIcon>
+        <ListItemText primary="Testimonials" />
+      </ListItemButton>
+    </NavLink>
+
+    {/* <ListItemButton>
       <ListItemIcon>
         <BarChartIcon />
       </ListItemIcon>
@@ -48,22 +64,26 @@ export const mainListItems = (
         <LayersIcon />
       </ListItemIcon>
       <ListItemText primary="Integrations" />
-    </ListItemButton>
+    </ListItemButton> */}
   </React.Fragment>
 );
 
 export const secondaryListItems = (
   <React.Fragment>
     <ListSubheader component="div" inset>
-      Saved reports
+      Main site
     </ListSubheader>
-    <ListItemButton>
-      <ListItemIcon>
-        <AssignmentIcon />
-      </ListItemIcon>
-      <ListItemText primary="Current month" />
-    </ListItemButton>
-    <ListItemButton>
+
+    <NavLink to="/">
+      <ListItemButton>
+        <ListItemIcon>
+          <ExitToAppIcon />
+        </ListItemIcon>
+        <ListItemText primary="Go to site" />
+      </ListItemButton>
+    </NavLink>
+
+    {/* <ListItemButton>
       <ListItemIcon>
         <AssignmentIcon />
       </ListItemIcon>
@@ -74,6 +94,6 @@ export const secondaryListItems = (
         <AssignmentIcon />
       </ListItemIcon>
       <ListItemText primary="Year-end sale" />
-    </ListItemButton>
+    </ListItemButton> */}
   </React.Fragment>
 );
