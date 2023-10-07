@@ -87,4 +87,4 @@ We welcome contributions from the community! If you'd like to contribute to the 
 
 This project is licensed under the [MIT License](LICENSE.md).
 
-Thank you for using our Tourist Agency App! If you have any questions or feedback, please don't hesitate to [contact us](mailto:your@email.com). Enjoy planning your next adventure!
+Thank you for using our Tourist Agency App! If you have any questions or feedback, please don't hesitate to [contact us](mailto:your@email.com). Enjoy planning your next adventure!!
