@@ -36,8 +36,11 @@ Our Tourist Agency App is designed to simplify the process of planning and booki
   - Axios for API requests
 
 - **Backend:**
+
   - Django
   - Django REST framework
+  - MySql
+
 - **Authentication:**
   - JWT (JSON Web Tokens)
 
