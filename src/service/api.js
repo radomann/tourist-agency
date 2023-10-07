@@ -13,21 +13,21 @@ export const axiosInstance = axios.create({
   },
 });
 
-// axiosInstance.interceptors.request.use(
-//   (config) => {
-//     const token = localStorage.token;
+axiosInstance.interceptors.request.use(
+  (config) => {
+    const token = localStorage.token;
 
-//     if (token) {
-//       config.headers.Authorization = `Bearer ${token}`;
-//     }
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`;
+    }
 
-//     return config;
-//   },
-//   (error) => {
-//     console.error("Request Error:", error);
-//     return Promise.reject(error);
-//   }
-// );
+    return config;
+  },
+  (error) => {
+    console.error("Request Error:", error);
+    return Promise.reject(error);
+  }
+);
 
 axiosInstance.interceptors.request.use(
   (request) => {

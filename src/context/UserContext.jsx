@@ -1,11 +1,12 @@
 import { createContext, useState, useEffect } from 'react';
 import jwtDecode from 'jwt-decode';
 import {authService} from '../service/auth'
+import {touristServices} from '../service/tourist'
 
 export const UserContext = createContext(null);
 
 const { Provider } = UserContext;
-const { getUserDetail } = authService;
+const { getUserDetail } = touristServices;
 
 export const UserProvider = ({ children }) => {
   const [user, setUser] = useState(
@@ -32,9 +33,9 @@ export const UserProvider = ({ children }) => {
 
   const userDetail = async () => {
     try {
-        const response = await getUserDetail(localStorage.getItem('token'));
+        const response = await getUserDetail();
         setUserdetail(response.data)
-        console.log(userdetail);
+        console.log(response.data);
     }
     catch (error) {
         console.log(error);

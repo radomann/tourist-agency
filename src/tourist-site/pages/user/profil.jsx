@@ -1,7 +1,7 @@
-import React, { useState, useRef, useContext } from 'react';
+import React, { useState, useRef, useContext, useEffect } from 'react';
 import { Navigate, useNavigate } from "react-router-dom";
 import { AppLayout } from '../../layout';
-import { authService } from '../../../service/auth';
+import { touristServices } from '../../../service/tourist';
 import { UserContext } from '../../../context/UserContext';
 
 export const UserProfil = () => {
@@ -13,13 +13,19 @@ export const UserProfil = () => {
     const [last_name, setLaststname] = useState('');
     const inputFile = useRef(null)
     const inputFileInDb = useRef()
-    // const [userdata, setUserdata] = useState([]);
-    // const { getUserDetail } = authService;
-    const { putUserData } = authService;
+
+    useEffect(() => {
+        setUsername(userdetail.username)
+        setEmail(userdetail.email)
+        setFirstname(userdetail.first_name)
+        setLaststname(userdetail.last_name)
+    },[userdetail])
+
+    const { putUserData } = touristServices;
     const navigate = useNavigate();
 
     const update = (event) => {
-        console.log(event.target.files[0].name)
+        // console.log(event.target.files[0].name)
         inputFileInDb.current.src = URL.createObjectURL(event.target.files[0]);
     }
 
@@ -32,8 +38,9 @@ export const UserProfil = () => {
         try {
             const body = JSON.stringify({ email, username, first_name, last_name })
             // console.log(body)
-            const response = await putUserData(body, localStorage.getItem('token'))
-            navigate('/')
+            const response = await putUserData(body)
+            console.log(response);
+            // navigate('/')
         } catch (error) {
             setError(error.response)
             console.log(error);
@@ -75,50 +82,51 @@ export const UserProfil = () => {
                                     <div className="col-md-12">
                                         <div className="form-floating">
                                             <input type="email"
-                                                value={userdetail.email ? userdetail.email : email}
+                                                name='email'
+                                                value={email}
                                                 onChange={event => handleInputChange(event, setEmail)}
                                                 className="form-control" id="email" />
-                                            <label htmlFor="name">Email</label>
+                                            <label htmlFor="email">Email</label>
                                         </div>
                                     </div>
                                     <div className="col-12">
                                         <div className="form-floating">
                                             <input type="text"
                                                 name='username'
-                                                value={userdetail.username ? userdetail.username : username}
+                                                value={username}
                                                 onChange={event => handleInputChange(event, setUsername)}
                                                 className="form-control" id="username" placeholder="Username" />
-                                            <label htmlFor="subject">Username</label>
+                                            <label htmlFor="username">Username</label>
                                         </div>
                                     </div>
                                     <div className="col-md-12">
                                         <div className="form-floating">
                                             <input type="text" className="form-control" id="first_name" placeholder="First Name"
-                                                value={userdetail.first_name ? userdetail.first_name : first_name}
+                                                value={first_name}
                                                 onChange={event => handleInputChange(event, setFirstname)}
                                             />
-                                            <label htmlFor="name">First Name</label>
+                                            <label htmlFor="first_name">First Name</label>
                                         </div>
                                     </div>
                                     <div className="col-12">
                                         <div className="form-floating">
-                                            <input type="text" className="form-control" name='last_name' id="surname" placeholder="Last name"
-                                                value={userdetail.last_name ? userdetail.last_name : last_name}
+                                            <input type="text" className="form-control" name='last_name' id="last_name" placeholder="Last name"
+                                                value={last_name}
                                                 onChange={event => handleInputChange(event, setLaststname)}
                                             />
-                                            <label htmlFor="subject">Last name</label>
+                                            <label htmlFor="last_name">Last name</label>
                                         </div>
                                     </div>
                                     <div className="col-12">
                                         <div className="form-floating">
-                                            <input type="password" className="form-control" id="password" placeholder="Password" />
-                                            <label htmlFor="subject">Password</label>
+                                            <input type="password" className="form-control" name="password" placeholder="Password" />
+                                            <label htmlFor="password">Password</label>
                                         </div>
                                     </div>
                                     <div className="col-12">
                                         <div className="form-floating">
-                                            <input type="password" className="form-control" id="confirmpassword" placeholder="Confirm password" />
-                                            <label htmlFor="subject">Confirm password</label>
+                                            <input type="password" className="form-control" name="confirmpassword" placeholder="Confirm password" />
+                                            <label htmlFor="confirmpassword">Confirm password</label>
                                         </div>
                                     </div>
                                     <div className="col-12">

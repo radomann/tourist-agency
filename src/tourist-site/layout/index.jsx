@@ -44,7 +44,6 @@ export const AppLayout = () => {
                                 </NavLink>
                                 <div className="dropdown-menu m-10">
                                     <NavLink to="/profil" className="dropdown-item">Profil edit</NavLink>
-                                    <NavLink to="/reservation" className="dropdown-item">My reservation</NavLink>
                                     <div className="dropdown-divider"></div>
                                     <button
                                         className="dropdown-item"

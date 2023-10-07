@@ -34,7 +34,7 @@ export const Card = ({ id, title, description, price, duration, number_of_people
         <p>{description.substring(0, 60)}...</p>
         <div className="d-flex justify-content-center mb-2">
           <NavLink to={'/single/' + id} className="btn btn-sm btn-primary px-3 border-end buttonRadiusLeft">Read More</NavLink>
-          <NavLink to="#booking" className="btn btn-sm btn-primary px-3 buttonRadiusRight">Book Now</NavLink>
+          <a href="#bookingform" className="btn btn-sm btn-primary px-3 buttonRadiusRight">Book Now</a>
         </div>
       </div>
     </div>
