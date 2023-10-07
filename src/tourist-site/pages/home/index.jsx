@@ -149,7 +149,7 @@ export const HomePage = () => {
                 <div className="row g-4 justify-content-center">
                     <section>
                         <div className="row text-center">
-                            {testimonial.map(({ description, first_name, last_name }, index) => <Testimonial3 key={index} description={description} first_name={first_name} last_name={last_name} image={'/img/testimonial.jpg'} />)}
+                            {testimonial.map(({ description, first_name, last_name }, index) => <Testimonial3 key={index} description={description} first_name={first_name} last_name={last_name} image={'/public/img/testimonial.jpg'} />)}
                         </div>
                     </section>
                 </div>
