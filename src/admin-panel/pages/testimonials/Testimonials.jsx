@@ -70,7 +70,9 @@ export const Testimonials = () => {
     try {
       const response = await deleteTestimonial(id);
 
-      if (response.data === 200) {
+      if (response.status === 204) {
+        fetchTestimonials();
+
         setAlertSeverity("success");
         setAlertMsg("Destiantion successfully deleted!");
         setOpenAlert(true);
@@ -83,7 +85,7 @@ export const Testimonials = () => {
       let errorMessage = error.message;
 
       if (error.response && error.response.data) {
-        errorMessage = error.response.data.message || "An error occurred";
+        errorMessage = error.response.data.detail || "An error occurred";
       }
 
       setAlertMsg(errorMessage);

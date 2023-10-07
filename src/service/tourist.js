@@ -13,20 +13,20 @@ class TouristServices {
   getSingleTestimonial = async (id) =>
     await axiosInstance.get(`/testimonials/${id}`);
 
-  submitDestination = async () => await axiosInstance.post("/destinations");
-  submitCategory = async () => await axiosInstance.post("/categories");
-  submitTestimonial = async () => await axiosInstance.post("/testimonials");
+  submitDestination = async () => await axiosInstance.post("/destinations/");
+  submitCategory = async () => await axiosInstance.post("/categories/");
+  submitTestimonial = async () => await axiosInstance.post("/testimonials/");
 
-  editDestination = async () => await axiosInstance.put("/destinations");
-  editCategory = async () => await axiosInstance.put("/categories");
-  editTestimonial = async () => await axiosInstance.put("/testimonials");
+  editDestination = async () => await axiosInstance.put("/destinations/");
+  editCategory = async () => await axiosInstance.put("/categories/");
+  editTestimonial = async () => await axiosInstance.put("/testimonials/");
 
   deleteDestination = async (id) =>
-    await axiosInstance.delete(`/destinations/${id}`);
+    await axiosInstance.delete(`/destinations/${id}/`);
   deleteCategory = async (id) =>
-    await axiosInstance.delete(`/categories/${id}`);
+    await axiosInstance.delete(`/categories/${id}/`);
   deleteTestimonial = async (id) =>
-    await axiosInstance.delete(`/testimonials/${id}`);
+    await axiosInstance.delete(`/testimonials/${id}/`);
 }
 
 export const touristServices = new TouristServices();

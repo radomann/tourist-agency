@@ -71,7 +71,9 @@ export const Destinations = () => {
     try {
       const response = await deleteDestination(id);
 
-      if (response.data === 200) {
+      if (response.status === 204) {
+        fetchDestinations();
+
         setAlertSeverity("success");
         setAlertMsg("Destiantion successfully deleted!");
         setOpenAlert(true);
@@ -84,7 +86,7 @@ export const Destinations = () => {
       let errorMessage = error.message;
 
       if (error.response && error.response.data) {
-        errorMessage = error.response.data.message || "An error occurred";
+        errorMessage = error.response.data.detail || "An error occurred";
       }
 
       setAlertMsg(errorMessage);

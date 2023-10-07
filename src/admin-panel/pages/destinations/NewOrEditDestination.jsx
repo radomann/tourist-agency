@@ -10,6 +10,7 @@ import {
   InputLabel,
   Select,
   Snackbar,
+  FormHelperText,
 } from "@mui/material";
 import MuiAlert from "@mui/material/Alert";
 import PeopleIcon from "@mui/icons-material/People";
@@ -45,29 +46,51 @@ export const NewOrEditDestination = () => {
   const params = useParams();
   let imagesArray = [];
 
-  const [title, setTitle] = useState("");
-  const [startDate, setStartDate] = useState(dayjs(currentDate));
-  const [endDate, setEndDate] = useState(dayjs(currentDate));
-  const [price, setPrice] = useState("");
-  const [numberOfPeople, setNumberOfPeople] = useState();
-  const [duration, setDuration] = useState("");
-  const [uploadedImages, setUploadedImages] = useState([]);
-  const [category, setCategory] = useState({ name: "" });
+  // const [title, setTitle] = useState("");
+  // const [startDate, setStartDate] = useState();
+  // const [endDate, setEndDate] = useState();
+  // const [price, setPrice] = useState("");
+  // const [numberOfPeople, setNumberOfPeople] = useState();
+  // const [duration, setDuration] = useState("");
+  // const [uploadedImages, setUploadedImages] = useState([]);
+  // const [category, setCategory] = useState({ name: "" });
   const [categories, setCategories] = useState([]);
+
+  const [destination, setDestination] = useState({
+    title: "",
+    start_date: null,
+    end_date: null,
+    price: "",
+    number_of_people: "",
+    duration: "",
+    category: { name: "" },
+    uploadedImages: [],
+  });
 
   // alert variables
   const [alertSeverity, setAlertSeverity] = useState();
   const [alertMsg, setAlertMsg] = useState();
   const [openAlert, setOpenAlert] = useState(false);
 
+  // variable for disabling submit button
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleSelectChange = (event) => {
-    setCategory(event.target.value);
-  };
+  // variables for input validation
+  const [titleError, setTitleError] = useState({});
+  const [startDateError, setStartDateError] = useState({});
+  const [endDateError, setEndDateError] = useState({});
+  const [categoryError, setCategoryError] = useState({});
 
   const imagesArrayCallback = (imagesArrayAsProp) => {
     imagesArray = imagesArrayAsProp;
+  };
+
+  // updating destination values from fetch
+  const updateDestination = (newValues) => {
+    setDestination((prevState) => ({
+      ...prevState,
+      ...newValues,
+    }));
   };
 
   const fetchDestination = async () => {
@@ -75,23 +98,25 @@ export const NewOrEditDestination = () => {
       const result = await getAllDestinations(`/destinations/${params.id}`);
       const data = result.data;
 
-      setTitle(data.title);
-      setPrice(data.price);
-      setDuration(data.duration);
-      setUploadedImages(data.media);
-      setCategory(data.category);
-      rteRef?.current?.editor?.commands.setContent(data.description);
-
       const startDate = new Date(data.start_date);
       const endDate = new Date(data.end_date);
 
-      setStartDate(dayjs(startDate));
-      setEndDate(dayjs(endDate));
+      updateDestination({
+        title: data.title,
+        price: data.price,
+        duration: data.duration,
+        category: data.category,
+        number_of_people: data.number_of_people,
+        media: data.media,
+        start_date: dayjs(startDate),
+        end_date: dayjs(endDate),
+      });
+      rteRef?.current?.editor?.commands.setContent(data.description);
     } catch (error) {
       let errorMessage = error.message;
 
       if (error.response && error.response.data) {
-        errorMessage = error.response.data.message || "An error occurred";
+        errorMessage = error.response.data.detail || "An error occurred";
       }
 
       setAlertMsg(errorMessage);
@@ -120,37 +145,132 @@ export const NewOrEditDestination = () => {
     fetchCategories();
   }, []);
 
-  const handleInputChange = (event, setState) => {
+  const handleInputChange = (event, setState, key) => {
     const {
       target: { value },
     } = event;
 
-    setState(value);
+    setState((prevState) => ({
+      ...prevState,
+      [key]:
+        typeof prevState[key] === "object"
+          ? { ...prevState[key], name: value }
+          : value,
+    }));
+  };
+
+  const handleAlertClose = () => {
+    setOpenAlert(false);
+  };
+
+  const validateTitle = () => {
+    if (!destination.title) {
+      setTitleError({ isError: true, message: "Title is required" });
+    } else {
+      setTitleError({ isError: false, message: "" });
+    }
+  };
+
+  const validateStartDate = () => {
+    if (!destination.start_date) {
+      setStartDateError({ isError: true, message: "Start date is required" });
+    } else {
+      setStartDateError({ isError: false, message: "" });
+    }
+  };
+
+  const validateEndDate = () => {
+    if (!destination.end_date) {
+      setStartDateError({ isError: true, message: "End date is required" });
+    } else {
+      setEndDateError({ isError: false, message: "" });
+    }
+  };
+
+  const validateCategory = () => {
+    if (!destination.category.name) {
+      setCategoryError({ isError: true, message: "Category is required" });
+    } else {
+      setCategoryError({ isError: false, message: "" });
+    }
   };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    setIsSubmitting(true);
 
-    const description = rteRef.current?.editor?.getHTML();
-    const payload = {
-      title,
-      start_date: startDate.$d,
-      end_date: endDate.$d,
-      location,
-      price,
-      duration,
-      description,
-      media: imagesArray,
-    };
+    validateTitle();
+    validateStartDate();
+    validateEndDate();
+    validateCategory();
 
-    if (params?.id) {
+    const hasErrors =
+      !titleError &&
+      !startDateError &&
+      !endDateError &&
+      !categoryError &&
+      destination.title &&
+      destination.startDate &&
+      destination.endDate &&
+      destination.category;
+
+    if (hasErrors) {
+      setIsSubmitting(true);
+
+      const description = rteRef.current?.editor?.getHTML();
+      const payload = JSON.stringify({ destination, description });
+
+      // const payload = {
+      //   title,
+      //   start_date: startDate.$d,
+      //   end_date: endDate.$d,
+      //   location,
+      //   price,
+      //   duration,
+      //   description,
+      //   media: imagesArray,
+      // };
+
+      if (params?.id) {
+        try {
+          const response = await editDestination(payload);
+
+          if (response.status === 200) {
+            setAlertSeverity("success");
+            setAlertMsg("Destiantion successfully edited!");
+            setOpenAlert(true);
+            console.log("Svaka cast");
+            setIsSubmitting(false);
+          } else {
+            setAlertSeverity("error");
+            setAlertMsg(response.data);
+            setOpenAlert(true);
+            console.error("Error:", response.data);
+            setIsSubmitting(false);
+          }
+        } catch (error) {
+          let errorMessage = error.message;
+
+          if (error.response && error.response.data) {
+            errorMessage = error.response.data.detail || "An error occurred";
+          }
+
+          setAlertSeverity("error");
+          setAlertMsg(errorMessage);
+          setOpenAlert(true);
+          console.error(errorMessage);
+          setIsSubmitting(false);
+        }
+
+        return;
+      }
+
       try {
-        const response = await editDestination(payload);
+        console.log(payload);
+        const response = await submitDestination(payload);
 
         if (response.status === 200) {
           setAlertSeverity("success");
-          setAlertMsg("Destiantion successfully edited!");
+          setAlertMsg("Destiantion successfully submitted!");
           setOpenAlert(true);
           console.log("Svaka cast");
           setIsSubmitting(false);
@@ -162,10 +282,10 @@ export const NewOrEditDestination = () => {
           setIsSubmitting(false);
         }
       } catch (error) {
-        let errorMessage = error.message;
+        let errorMessage = "";
 
-        if (error.response && error.response.data) {
-          errorMessage = error.response.data.message || "An error occurred";
+        if (error.message && error.response.data) {
+          errorMessage = error.message || "An error occurred";
         }
 
         setAlertSeverity("error");
@@ -174,44 +294,7 @@ export const NewOrEditDestination = () => {
         console.error(errorMessage);
         setIsSubmitting(false);
       }
-
-      return;
     }
-
-    try {
-      console.log(payload);
-      const response = await submitDestination(payload);
-
-      if (response.status === 200) {
-        setAlertSeverity("success");
-        setAlertMsg("Destiantion successfully submitted!");
-        setOpenAlert(true);
-        console.log("Svaka cast");
-        setIsSubmitting(false);
-      } else {
-        setAlertSeverity("error");
-        setAlertMsg(response.data);
-        setOpenAlert(true);
-        console.error("Error:", response.data);
-        setIsSubmitting(false);
-      }
-    } catch (error) {
-      let errorMessage = error.message;
-
-      if (error.response && error.response.data) {
-        errorMessage = error.response.data.message || "An error occurred";
-      }
-
-      setAlertSeverity("error");
-      setAlertMsg(errorMessage);
-      setOpenAlert(true);
-      console.error(errorMessage);
-      setIsSubmitting(false);
-    }
-  };
-
-  const handleAlertClose = () => {
-    setOpenAlert(false);
   };
 
   return (
@@ -248,25 +331,50 @@ export const NewOrEditDestination = () => {
               id="title"
               label="Title"
               variant="outlined"
-              sx={{ width: "100%", marginRight: 1 }}
-              onChange={(event) => handleInputChange(event, setTitle)}
-              value={title}
+              sx={{ width: "100%", marginRight: 1, flex: "0 0 60%" }}
+              onChange={(event) =>
+                handleInputChange(event, setDestination, "title")
+              }
+              value={destination.title}
+              onBlur={validateTitle}
+              error={titleError.isError}
+              helperText={titleError.message}
             />
 
-            <DatePicker
-              // defaultValue={dayjs(currentDate)}
-              format="DD/MM/YYYY"
+            <FormControl
+              variant="outlined"
+              fullWidth
+              error={startDateError.isError}
               sx={{ marginRight: 1 }}
-              onChange={(event) => handleInputChange(event, setStartDate)}
-              value={startDate}
-            />
+            >
+              <DatePicker
+                format="DD/MM/YYYY"
+                disablePast
+                onChange={(event) =>
+                  handleInputChange(event, setDestination, "start_date")
+                }
+                value={destination.start_date}
+                onBlur={validateStartDate}
+              />
+              <FormHelperText>{startDateError.message}</FormHelperText>
+            </FormControl>
 
-            <DatePicker
-              // defaultValue={dayjs(currentDate)}
-              format="DD/MM/YYYY"
-              onChange={(event) => handleInputChange(event, setEndDate)}
-              value={endDate}
-            />
+            <FormControl
+              variant="outlined"
+              fullWidth
+              error={endDateError.isError}
+            >
+              <DatePicker
+                format="DD/MM/YYYY"
+                disablePast
+                onChange={(event) =>
+                  handleInputChange(event, setDestination, "end_date")
+                }
+                value={destination.end_date}
+                onBlur={validateEndDate}
+              />
+              <FormHelperText>{endDateError.message}</FormHelperText>
+            </FormControl>
           </Box>
 
           <RichTextEditor
@@ -285,15 +393,24 @@ export const NewOrEditDestination = () => {
             )}
           />
 
-          <Box sx={{ display: "flex", marginTop: 2 }}>
-            <FormControl sx={{ marginRight: 1, minWidth: 120 }}>
+          <Box
+            sx={{
+              display: "flex",
+              marginTop: 2,
+              flexDirection: { xs: "column", md: "row" },
+            }}
+          >
+            <FormControl sx={{ minWidth: 120 }} error={categoryError.isError}>
               <InputLabel id="category-label">Category</InputLabel>
               <Select
                 labelId="category-label"
                 id="category"
-                value={category.name}
+                value={destination.category.name}
                 label="Category"
-                onChange={handleSelectChange}
+                onBlur={validateCategory}
+                onChange={(event) =>
+                  handleInputChange(event, setDestination, "category")
+                }
               >
                 {categories.map((category) => (
                   <MenuItem key={category.id} value={category.name}>
@@ -301,6 +418,7 @@ export const NewOrEditDestination = () => {
                   </MenuItem>
                 ))}
               </Select>
+              <FormHelperText>{categoryError.message}</FormHelperText>
             </FormControl>
 
             <TextField
@@ -310,9 +428,11 @@ export const NewOrEditDestination = () => {
               InputProps={{
                 endAdornment: <InputAdornment position="end">€</InputAdornment>,
               }}
-              sx={{ marginLeft: 1 }}
-              onChange={(event) => handleInputChange(event, setPrice)}
-              value={price}
+              sx={{ marginLeft: { md: 1 }, marginTop: { xs: 1, md: 0 } }}
+              onChange={(event) =>
+                handleInputChange(event, setDestination, "price")
+              }
+              value={destination.price}
             />
 
             <TextField
@@ -326,9 +446,11 @@ export const NewOrEditDestination = () => {
                   </InputAdornment>
                 ),
               }}
-              sx={{ marginLeft: 1 }}
-              onChange={(event) => handleInputChange(event, setNumberOfPeople)}
-              value={numberOfPeople}
+              sx={{ marginLeft: { md: 1 }, marginTop: { xs: 1, md: 0 } }}
+              onChange={(event) =>
+                handleInputChange(event, setDestination, "number_of_people")
+              }
+              value={destination.number_of_people}
             />
 
             <TextField
@@ -342,9 +464,11 @@ export const NewOrEditDestination = () => {
                   </InputAdornment>
                 ),
               }}
-              sx={{ marginLeft: 1 }}
-              onChange={(event) => handleInputChange(event, setDuration)}
-              value={duration}
+              sx={{ marginLeft: { md: 1 }, marginTop: { xs: 1, md: 0 } }}
+              onChange={(event) =>
+                handleInputChange(event, setDestination, "duration")
+              }
+              value={destination.duration}
             />
           </Box>
 
@@ -352,7 +476,7 @@ export const NewOrEditDestination = () => {
             <h5>Gallery</h5>
             <GalleryUpload
               imagesCallback={imagesArrayCallback}
-              alreadyUploadedImages={uploadedImages}
+              alreadyUploadedImages={destination.media}
             />
           </Box>
 

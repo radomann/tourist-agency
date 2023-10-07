@@ -26,7 +26,7 @@ export const appRoutes = [
       },
       {
         path: "admin",
-        element: <AdminPanel />,
+        element: <ProtectedRoute element={<AdminPanel />} />,
         children: [
           {
             path: "",

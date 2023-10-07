@@ -29,9 +29,9 @@ export const NewOrEditTestimonial = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   // variables for input validation
-  const [firstNameError, setFirstNameError] = useState("");
-  const [lastNameError, setLastNameError] = useState("");
-  const [descError, setDescError] = useState("");
+  const [firstNameError, setFirstNameError] = useState({});
+  const [lastNameError, setLastNameError] = useState({});
+  const [descError, setDescError] = useState({});
 
   const fetchTestimonial = async () => {
     try {
@@ -67,25 +67,25 @@ export const NewOrEditTestimonial = () => {
 
   const validateFirstName = () => {
     if (!testimonial.first_name) {
-      setFirstNameError("First name is required");
+      setFirstNameError({ isError: true, message: "First name is required" });
     } else {
-      setFirstNameError("");
+      setFirstNameError({ isError: false, message: "" });
     }
   };
 
   const validateLastName = () => {
     if (!testimonial.last_name) {
-      setLastNameError("Last name is required");
+      setLastNameError({ isError: true, message: "Last name is required" });
     } else {
-      setLastNameError("");
+      setLastNameError({ isError: false, message: "" });
     }
   };
 
   const validateDesc = () => {
     if (!testimonial.description) {
-      setDescError("Description is required");
+      setDescError({ isError: true, message: "Description is required" });
     } else {
-      setDescError("");
+      setDescError({ isError: false, message: "" });
     }
   };
 
@@ -97,15 +97,27 @@ export const NewOrEditTestimonial = () => {
     validateDesc();
 
     // field validation
-    if (!firstNameError && !lastNameError && !descError) {
+    const hasErrors =
+      !firstNameError.isError &&
+      !lastNameError.isError &&
+      !descError.isError &&
+      testimonial.first_name &&
+      testimonial.last_name &&
+      testimonial.description;
+
+    if (hasErrors) {
       setIsSubmitting(true);
+
+      const payload = {
+        first_name: testimonial.first_name,
+        last_name: testimonial.last_name,
+        description: testimonial.description,
+      };
+
       // if there is an ID, means testimonial has to be edited
       if (params?.id) {
         try {
-          const payload = JSON.stringify(testimonial);
           const response = await editTestimonial(payload);
-
-          console.log("test edit", payload);
 
           if (response.status === 200) {
             setAlertSeverity("success");
@@ -124,7 +136,7 @@ export const NewOrEditTestimonial = () => {
           let errorMessage = error.message;
 
           if (error.response && error.response.data) {
-            errorMessage = error.response.data.message || "An error occurred";
+            errorMessage = error.response.data.detail || "An error occurred";
           }
 
           setAlertSeverity("error");
@@ -139,8 +151,9 @@ export const NewOrEditTestimonial = () => {
 
       // else just insert new testimonial
       try {
-        const payload = JSON.stringify(testimonial);
         const response = await submitTestimonial(payload);
+
+        console.log(payload);
 
         if (response.status === 200) {
           setAlertMsg("Testimonial successfuly submitted!");
@@ -156,10 +169,10 @@ export const NewOrEditTestimonial = () => {
           setIsSubmitting(false);
         }
       } catch (error) {
-        let errorMessage = error.message;
+        let errorMessage = "";
 
-        if (error.response && error.response.data) {
-          errorMessage = error.response.data.message || "An error occurred";
+        if (error.message && error.response.data) {
+          errorMessage = error.message || "An error occurred";
         }
 
         setAlertMsg(errorMessage);
@@ -211,8 +224,8 @@ export const NewOrEditTestimonial = () => {
               }
               value={testimonial.first_name}
               onBlur={validateFirstName}
-              error={!!firstNameError}
-              helperText={firstNameError}
+              error={firstNameError.isError}
+              helperText={firstNameError.message}
             />
 
             <TextField
@@ -225,8 +238,8 @@ export const NewOrEditTestimonial = () => {
               }
               value={testimonial.last_name}
               onBlur={validateLastName}
-              error={!!lastNameError}
-              helperText={lastNameError}
+              error={lastNameError.isError}
+              helperText={lastNameError.message}
             />
           </Box>
 
@@ -242,8 +255,8 @@ export const NewOrEditTestimonial = () => {
             }
             value={testimonial.description}
             onBlur={validateDesc}
-            error={!!descError}
-            helperText={descError}
+            error={descError.isError}
+            helperText={descError.message}
           />
 
           <Button type="submit" variant="contained" disabled={isSubmitting}>

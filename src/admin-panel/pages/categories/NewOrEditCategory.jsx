@@ -23,7 +23,7 @@ export const NewOrEditCategory = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   // variables for input validation
-  const [categoryError, setCategoryError] = useState("");
+  const [categoryError, setCategoryError] = useState({});
 
   const handleInputChange = (event, setState, key) => {
     const {
@@ -57,9 +57,9 @@ export const NewOrEditCategory = () => {
 
   const validateCategory = () => {
     if (!category.name) {
-      setCategoryError("Category name is required");
+      setCategoryError({ isError: true, message: "Category name is required" });
     } else {
-      setCategoryError("");
+      setCategoryError({ isError: false, message: "" });
     }
   };
 
@@ -68,12 +68,16 @@ export const NewOrEditCategory = () => {
 
     validateCategory();
 
-    if (!categoryError) {
+    // field validation
+    const hasErrors = !categoryError.isError && category.name;
+
+    if (hasErrors) {
       setIsSubmitting(true);
       // if there is an ID, means category has to be edited
       if (params?.id) {
         try {
-          const response = await editCategory(category);
+          const payload = JSON.stringify(category);
+          const response = await editCategory(payload);
 
           if (response.status === 200) {
             setAlertSeverity("success");
@@ -92,7 +96,7 @@ export const NewOrEditCategory = () => {
           let errorMessage = error.message;
 
           if (error.response && error.response.data) {
-            errorMessage = error.response.data.message || "An error occurred";
+            errorMessage = error.response.data.detail || "An error occurred";
           }
 
           setAlertMsg(errorMessage);
@@ -107,7 +111,9 @@ export const NewOrEditCategory = () => {
 
       // else just insert new category
       try {
-        const response = await submitCategory(category);
+        console.log(category);
+        const payload = JSON.stringify(category);
+        const response = await submitCategory(payload);
 
         if (response.status === 200) {
           setAlertMsg("Category successfuly submitted!");
@@ -123,10 +129,10 @@ export const NewOrEditCategory = () => {
           setIsSubmitting(false);
         }
       } catch (error) {
-        let errorMessage = error.message;
+        let errorMessage = "";
 
-        if (error.response && error.response.data) {
-          errorMessage = error.response.data.message || "An error occurred";
+        if (error.message && error.response.data) {
+          errorMessage = error.message || "An error occurred";
         }
 
         setAlertMsg(errorMessage);
@@ -182,8 +188,8 @@ export const NewOrEditCategory = () => {
               }
               value={category.name}
               onBlur={validateCategory}
-              error={!!categoryError}
-              helperText={categoryError}
+              error={categoryError.isError}
+              helperText={categoryError.message}
             />
           </Box>
 
